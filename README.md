@@ -25,8 +25,6 @@ for example:
 
 In the shopping list Tariq has Cookies, but he could spell like Cookies, c00Kies, Co0kies and so on.
 
-YOU ARE NOT ALLOWED to use any Java based string manipulation!!!!!!!!!!!!
-
 You must use regex to detect the patterns and match them.
 
 
