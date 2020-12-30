@@ -4,7 +4,7 @@ By this time you should have been introduced to Java Strings, Exceptions, Unit T
 
 # You will need all of these today!
 
-In this project you will find a file in the resource folder called RawData.txt. It was supposed to be a grocery list formatted in JSON, but Tariq your fearless leader decided to come reformat it in his own Object Notation. JerkSON... you are welcome.
+In this project you will find a file in the resource folder called RawData.txt. It was supposed to be a grocery list formatted in JSON, but The Baron your fearless leader decided to come reformat it in his own Object Notation. JerkSON... you are welcome.
 
 ## JerkSON Format
 
