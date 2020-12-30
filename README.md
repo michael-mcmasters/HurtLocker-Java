@@ -19,16 +19,16 @@ In Json Key and Value pairs are separated by a ',' in JerkSON its '##'
 ## Your Task
 Its your job to build a JerkSON data parser, that is able to read in the raw data , and output a string formated list that resembles (outputFormat.txt) 
 
-There are some things to look out for.... If you haven't figured it out by now Tariq has many wonderful qualities, spelling isn't one of them, so Words may not be spelled correctly. You need to decipher what Tariq was trying to spell using pattern matching.
+There are some things to look out for.... If you haven't figured it out by now The Baron has many wonderful qualities, spelling isn't one of them, so Words may not be spelled correctly. You need to decipher what The Baron was trying to spell using pattern matching.
 
 for example:
 
-In the shopping list Tariq has Cookies, but he could spell like Cookies, c00Kies, Co0kies and so on.
+In the shopping list The Barron has Cookies, but he could spell like Cookies, c00Kies, Co0kies and so on.
 
 You must use regex to detect the patterns and match them.
 
 
-Oh one more thing.... Tariq is kind of petty... so you can blame Abi and Vic for this.
+Oh one more thing.... The Barron is kind of petty... so you can blame Abi and Vic for this.
 
 It's not guranteed that every Key will have a Value, and every Value will have a pair. For instance:
 
