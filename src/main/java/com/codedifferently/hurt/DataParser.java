@@ -18,24 +18,13 @@ public class DataParser {
         System.out.println(indexErrorThrownAt);
     }
 
-    private String getData(String str) {
+    private void getData(String str) {
         String result = "";
 
         Matcher m = Pattern.compile("\\w+.*\\w+").matcher(str);
         while (m.find()) {
             String data = m.group();
-            String[] dataArr = data.split("(;|:|\\^|%|\\*|@|!)");
-
-            for (int i = 0; i < dataArr.length; i += 2) {
-                try {
-                    System.out.println(dataArr[i] + ": " + dataArr[i + 1]);
-                    result =
-                } catch (IndexOutOfBoundsException e) {
-                    errors++;
-                    indexErrorThrownAt = i;
-                    System.out.println("ERROR IS HERE");
-                }
-            }
+            DataBuilder.buildClass(data);
         }
         System.out.println("                  ");
     }

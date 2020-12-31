@@ -1,7 +1,7 @@
 package com.codedifferently.hurt;
 
 public class Data {
-    private String name;
+    public String name;
     private String price;
     private String type;
     private String expiration;

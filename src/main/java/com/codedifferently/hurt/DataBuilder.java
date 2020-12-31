@@ -8,20 +8,39 @@ import java.util.List;
 
 public class DataBuilder {
 
-    List<Data> dataList = new ArrayList<>();
+    static List<Data> dataList = new ArrayList<>();
 
-    public void buildClass(String input) {
-        String[] properties = getPair(input);
+    public static List<Data> getDataList() {
+        return dataList;
+    }
 
-        Data data = new Data("", "", "", "");
+    public static void buildClass(String dataStr) {
+        List<String> properties = getPair(dataStr);
+
+        Data data = new Data(properties.get(0), properties.get(1), properties.get(2), properties.get(3));
         dataList.add(data);
+
+        System.out.println(dataList.size());
     }
 
-    private String[] getPair(String input) {
-        String[] properties = input.split(": ");
+    private static List<String> getPair(String data) {
+        List<String> properties = new ArrayList<>();
+
+        String[] dataArr = data.split("(;|:|\\^|%|\\*|@|!)");
+        for (int i = 0; i < dataArr.length; i += 2) {
+            try {
+                System.out.println(dataArr[i] + ": " + dataArr[i + 1]);
+                properties.add(dataArr[i + 1]);
+            } catch (IndexOutOfBoundsException e) {
+                //errors++;
+                //indexErrorThrownAt = i;
+                System.out.println("ERROR IS HERE");
+            }
+        }
+        return properties;
     }
 
-    public void createLogFile(String data) throws IOException {
+    public static void createLogFile(String data) throws IOException {
         File file = new File("../../../../../output.txt");
         FileWriter writer = new FileWriter(file);
         writer.write("our text here");
