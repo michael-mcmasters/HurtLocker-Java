@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -128,43 +129,59 @@ public class DataBuilder {
     }
 
 
-
-
     private static void test(List<Data> dataList) {
 
-        System.out.println("test CALLED");
+//        getInfoFor(dataList, "apples", new Function<Data, String>(){
+//            public String apply(Data input) {
+//                return input.getPrice();
+//            }});
 
-        getInfoFor(dataList, "apples", new Function<Data, String>(){
-            public String apply(Data input) {
-                return input.getPrice();
-            }});
+        Function<Data, String> fn = data -> data.getPrice();
+        getInfoFor(dataList, "milk", fn);
+
+        getInfoFor(dataList, "milk", data -> data.getPrice());
     }
 
 
-    private static Map<String, Integer> getInfoFor(List<Data> dataList, String name, Function function) {
+    private static Map<String, Integer> getInfoFor(List<Data> dataList, String name, Function<Data, String> function) {
         Map<String, Integer> map = new HashMap<>();
 
         System.out.println("getInfoFor CALLED");
         System.out.println("size is " + dataList.size());
 
-        for (Data data: dataList) {
+        for (Data data : dataList) {
             System.out.println("looping");
             if (function.apply(data) != "") {
-                System.out.println("DATA IS "+ function.apply(data));
+                System.out.println("DATA IS " + function.apply(data));
             }
         }
         return null;
     }
 
+//
+//    private static void test(List<Data> dataList) {
+//        String message = "Hello World";
+//        //getInfoFor(dataList, "milk", value -> print(value));
+//        getInfoFor(dataList, "milk", data -> data.getPrice());
+//    }
 
-
-
-
-
-//    private static int getNumOfNames(List<Data> dataList) {
-//        int counter = 0;
+//    public static void getInfoFor(List<Data> dataList, String name, Consumer<Data> lambda) {
+//        lambda.accept(value);
+//
+//        System.out.println("getInfoFor CALLED");
+//        System.out.println("size is " + dataList.size());
+//
 //        for (Data data : dataList) {
-//            if data.getName() != null
+//            System.out.println("looping");
+////            if (function.apply(data) != "") {
+////                System.out.println("DATA IS " + function.apply(data));
+////            }
+//            lambda.accept(data);
+//
+//            if (lambda.accept(data) != "") {
+//                System.out.println("DATA IS " + function.apply(data));
+//            }
 //        }
+//        return null;
 //    }
 }
