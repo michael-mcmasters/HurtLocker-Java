@@ -9,7 +9,7 @@ public class RawDataParser implements IRawDataParser {
 
     // Converts every line of the corrupted JSON file to a Data object. Returns all objects.
     @Override
-    public List<Data> convertJSONToObject(String rawData) {
+    public List<Data> convertJSONToObjects(String rawData) {
         List<Data> dataList = new ArrayList<>();
 
         rawData = rawData.toLowerCase();
@@ -23,7 +23,7 @@ public class RawDataParser implements IRawDataParser {
     }
 
     // Returns an array of properties for the corrupted JSON object.
-    // Use list instead of an array just in case there are more than 4 items.
+    // Use list<> instead of an array just in case there are more than 4 items.
     private String[] getProperties(String lineOfData) {
         List<String> properties = new ArrayList<>();
 

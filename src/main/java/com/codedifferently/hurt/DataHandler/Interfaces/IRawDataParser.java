@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface IRawDataParser {
 
-    public List<Data> convertJSONToObject(String rawData);
+    public List<Data> convertJSONToObjects(String rawData);
 
 }

@@ -8,20 +8,18 @@ import java.util.List;
 
 public class DataHandler {
 
-    private List<Data> data;
     private IRawDataParser rawDataParser;
     private IDataParser dataParser;
     private IFileCreator fileCreator;
 
     public DataHandler(String rawData) {
         rawDataParser = new RawDataParser();
-        dataParser = new DataParser();
+        dataParser = new DataParser(convertJSONToObjects(rawData));
         fileCreator = new FileCreator();
-        data = formatData(rawData);
     }
 
-    private List<Data> formatData(String rawData) {
-        return rawDataParser.convertJSONToObject(rawData);
+    private List<Data> convertJSONToObjects(String rawData) {
+        return rawDataParser.convertJSONToObjects(rawData);
     }
 
     public void logDataToFile() {
