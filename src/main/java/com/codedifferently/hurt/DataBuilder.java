@@ -4,11 +4,14 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DataBuilder {
 
     static List<Data> dataList = new ArrayList<>();
+    static int errorsCount = 0;
 
     public static List<Data> getDataList() {
         return dataList;
@@ -32,19 +35,93 @@ public class DataBuilder {
                 System.out.println(dataArr[i] + ": " + dataArr[i + 1]);
                 properties.add(dataArr[i + 1]);
             } catch (IndexOutOfBoundsException e) {
-                //errors++;
-                //indexErrorThrownAt = i;
-                System.out.println("ERROR IS HERE");
+                errorsCount++;
             }
         }
         return properties;
     }
 
-    public static void createLogFile(String data) throws IOException {
-        File file = new File("../../../../../output.txt");
-        FileWriter writer = new FileWriter(file);
-        writer.write("our text here");
-        writer.flush();
-        writer.close();
+    public static void createLogFile() {
+        File file = new File("output2.txt");
+
+        try {
+            String output = getPrintedText();
+
+            FileWriter writer = new FileWriter(file);
+            writer.write(output);
+            writer.flush();
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("FAILED");
+        }
     }
+
+    private static String getPrintedText() {
+        String output = "";
+        Map<String, Integer> names = getAllNames();
+        for (String name : names.keySet()) {
+            System.out.println(name);
+            Map<String, Integer> prices = getAllPricesForNames(name);
+            System.out.println(names);
+            System.out.println(prices);
+        }
+//        for (Data data : dataList) {
+//            if (data.getName() == "") {
+//                System.out.println("YES THIS IS BROKEN");
+//                break;
+//            }
+//
+//            output += " " + data.getName();
+//            output += " " + data.getPrice();
+//            output += " " + data.getType();
+//            output += " " + data.getExpiration();
+//            output += "\n";
+//        }
+        return output;
+    }
+
+    private static Map<String, Integer> getAllNames() {
+        // Name, times appeared
+        Map<String, Integer> map = new HashMap<>();
+
+        for (Data data : dataList) {
+            if (data.getName() == "") continue;
+
+            if (map.containsKey(data.getName())) {
+                int timesAppeared = map.get(data.getName());
+                map.put(data.getName(), ++timesAppeared);
+            } else {
+                map.put(data.getName(), 1);
+            }
+        }
+        return map;
+    }
+
+    private static Map<String, Integer> getAllPricesForNames(String name) {
+        // Price, times appeared
+        Map<String, Integer> map = new HashMap<>();
+
+        for (Data data : dataList) {
+            if (data.getPrice() == "") continue;
+
+            if (map.containsKey(data.getPrice())) {
+                int timesAppeared = map.get(data.getPrice());
+                map.put(data.getPrice(), ++timesAppeared);
+            } else {
+                map.put(data.getPrice(), 1);
+            }
+        }
+        return map;
+    }
+
+
+
+
+
+//    private static int getNumOfNames(List<Data> dataList) {
+//        int counter = 0;
+//        for (Data data : dataList) {
+//            if data.getName() != null
+//        }
+//    }
 }

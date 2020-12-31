@@ -12,13 +12,13 @@ public class DataParser {
         input = input.toLowerCase();
         String[] strArr = input.split("##");
         for (String str : strArr) {
-            getData(str);
+            createData(str);
         }
         System.out.println(errors);
         System.out.println(indexErrorThrownAt);
     }
 
-    private void getData(String str) {
+    private void createData(String str) {
         String result = "";
 
         Matcher m = Pattern.compile("\\w+.*\\w+").matcher(str);
@@ -26,6 +26,8 @@ public class DataParser {
             String data = m.group();
             DataBuilder.buildClass(data);
         }
+        DataBuilder.createLogFile();
+
         System.out.println("                  ");
     }
 
