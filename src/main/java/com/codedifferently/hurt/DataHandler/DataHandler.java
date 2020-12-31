@@ -15,14 +15,14 @@ public class DataHandler {
     public DataHandler(String rawData) {
         rawDataParser = new RawDataParser();
         dataParser = new DataParser(convertJSONToObjects(rawData));
-        fileCreator = new FileCreator();
+        fileCreator = new FileCreator(dataParser);
     }
 
     private List<Data> convertJSONToObjects(String rawData) {
         return rawDataParser.convertJSONToObjects(rawData);
     }
 
-    public void logDataToFile() {
-
+    public void printDataToFile() {
+        fileCreator.createLogFile();
     }
 }

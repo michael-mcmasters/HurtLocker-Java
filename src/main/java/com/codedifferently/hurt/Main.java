@@ -16,6 +16,6 @@ public class Main {
         //System.out.println(output);
 
         DataHandler dataHandler = new DataHandler(output);
-        dataHandler.logDataToFile();
+        dataHandler.printDataToFile();
     }
 }
