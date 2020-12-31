@@ -14,5 +14,9 @@ public class Main {
         String output = (new Main()).readRawDataToString();
         System.out.println(output);
 
+        Main main = new Main();
+        JerskSONBuilder jb = new JerskSONBuilder();
+        String rawData = main.readRawDataToString();
+        jb.build(rawData);
     }
 }
