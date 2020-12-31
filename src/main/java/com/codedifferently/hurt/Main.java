@@ -15,8 +15,8 @@ public class Main {
         System.out.println(output);
 
         Main main = new Main();
-        JerskSONBuilder jb = new JerskSONBuilder();
+        DataParser dp = new DataParser();
         String rawData = main.readRawDataToString();
-        jb.build(rawData);
+        dp.build(rawData);
     }
 }

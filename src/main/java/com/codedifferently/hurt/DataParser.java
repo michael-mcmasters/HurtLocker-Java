@@ -3,7 +3,7 @@ package com.codedifferently.hurt;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class JerskSONBuilder {
+public class DataParser {
 
     int errors = 0;
     int indexErrorThrownAt = 0;
