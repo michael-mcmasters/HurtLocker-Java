@@ -20,15 +20,16 @@ public class FileCreator implements IFileCreator {
     @Override
     public void createLogFile() {
         Map<String, List<Data>> names = dataParser.getInstancesOfEveryName();
-        for (String key : names.keySet()) {
-            System.out.println("__"+ key + "__");
+        for (String namesKey : names.keySet()) {
+            System.out.println("__"+ namesKey + "__");
 
-            int seen = names.get(key).size();
+            List<Data> list = names.get(namesKey);
+            int seen = list.size();
+
             System.out.println("Times appeared: " + seen);
-            Map<String, Integer> prices = dataParser.getPricesAndOccurences();
+            Map<String, Integer> prices = dataParser.getPricesAndOccurences(list);
             System.out.println("Prices: " + prices);
             System.out.println("\n");
-            //System.out.println(key);
         }
 
 

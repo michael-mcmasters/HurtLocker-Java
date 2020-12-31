@@ -62,19 +62,19 @@ public class DataParser implements IDataParser {
     }
 
     // Helper methods for if you don't want to pass a lambda.
-    public Map<String, Integer> getNamesAndOccurences() {
+    public Map<String, Integer> getNamesAndOccurences(List<Data> dataList) {
         return getPropertyAndOccurences(dataList, data -> data.name);
     }
 
-    public Map<String, Integer> getPricesAndOccurences() {
+    public Map<String, Integer> getPricesAndOccurences(List<Data> dataList) {
         return getPropertyAndOccurences(dataList, data -> data.price);
     }
 
-    public Map<String, Integer> getTypesAndOccurences() {
+    public Map<String, Integer> getTypesAndOccurences(List<Data> dataList) {
         return getPropertyAndOccurences(dataList, data -> data.type);
     }
 
-    public Map<String, Integer> getExpirationsAndOccurences() {
+    public Map<String, Integer> getExpirationsAndOccurences(List<Data> dataList) {
         return getPropertyAndOccurences(dataList, data -> data.expiration);
     }
 
