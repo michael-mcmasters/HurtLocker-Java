@@ -130,15 +130,6 @@ public class DataBuilder {
 
 
     private static void test(List<Data> dataList) {
-
-//        getInfoFor(dataList, "apples", new Function<Data, String>(){
-//            public String apply(Data input) {
-//                return input.getPrice();
-//            }});
-
-        Function<Data, String> fn = data -> data.getPrice();
-        getInfoFor(dataList, "milk", fn);
-
         getInfoFor(dataList, "milk", data -> data.getPrice());
     }
 
@@ -146,42 +137,37 @@ public class DataBuilder {
     private static Map<String, Integer> getInfoFor(List<Data> dataList, String name, Function<Data, String> function) {
         Map<String, Integer> map = new HashMap<>();
 
-        System.out.println("getInfoFor CALLED");
-        System.out.println("size is " + dataList.size());
-
         for (Data data : dataList) {
-            System.out.println("looping");
             if (function.apply(data) != "") {
                 System.out.println("DATA IS " + function.apply(data));
             }
         }
         return null;
     }
-
-//
-//    private static void test(List<Data> dataList) {
-//        String message = "Hello World";
-//        //getInfoFor(dataList, "milk", value -> print(value));
-//        getInfoFor(dataList, "milk", data -> data.getPrice());
-//    }
-
-//    public static void getInfoFor(List<Data> dataList, String name, Consumer<Data> lambda) {
-//        lambda.accept(value);
-//
-//        System.out.println("getInfoFor CALLED");
-//        System.out.println("size is " + dataList.size());
-//
-//        for (Data data : dataList) {
-//            System.out.println("looping");
-////            if (function.apply(data) != "") {
-////                System.out.println("DATA IS " + function.apply(data));
-////            }
-//            lambda.accept(data);
-//
-//            if (lambda.accept(data) != "") {
-//                System.out.println("DATA IS " + function.apply(data));
-//            }
-//        }
-//        return null;
-//    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
