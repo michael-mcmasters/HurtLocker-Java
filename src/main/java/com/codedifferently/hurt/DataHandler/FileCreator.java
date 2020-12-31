@@ -21,7 +21,14 @@ public class FileCreator implements IFileCreator {
     public void createLogFile() {
         Map<String, List<Data>> names = dataParser.getInstancesOfEveryName();
         for (String key : names.keySet()) {
-            System.out.println(key);
+            System.out.println("__"+ key + "__");
+
+            int seen = names.get(key).size();
+            System.out.println("Times appeared: " + seen);
+            Map<String, Integer> prices = dataParser.getPricesAndOccurences();
+            System.out.println("Prices: " + prices);
+            System.out.println("\n");
+            //System.out.println(key);
         }
 
 
