@@ -6,6 +6,8 @@ import com.codedifferently.hurt.DataHandler.Interfaces.IFileCreator;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 public class FileCreator implements IFileCreator {
 
@@ -17,11 +19,21 @@ public class FileCreator implements IFileCreator {
 
     @Override
     public void createLogFile() {
-        File file = new File("output_2.txt");
+        Map<String, List<Data>> names = dataParser.getInstancesOfEveryName();
+        for (String key : names.keySet()) {
+            System.out.println(key);
+        }
 
+
+        printToFile(names.toString());
+        //System.out.println(names);
+    }
+
+    private void printToFile(String output) {
+        File file = new File("output_2.txt");
         try {
             //String output = getData();
-            String output = "wow";
+            //String output = "wow";
 
             FileWriter writer = new FileWriter(file);
             writer.write(output);
