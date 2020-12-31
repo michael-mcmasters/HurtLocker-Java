@@ -1,1 +1,10 @@
-{bread=[com.codedifferently.hurt.DataHandler.Data@7106e68e, com.codedifferently.hurt.DataHandler.Data@7eda2dbb, com.codedifferently.hurt.DataHandler.Data@6576fe71, com.codedifferently.hurt.DataHandler.Data@76fb509a, com.codedifferently.hurt.DataHandler.Data@300ffa5d, com.codedifferently.hurt.DataHandler.Data@1f17ae12], milk=[com.codedifferently.hurt.DataHandler.Data@4d405ef7, com.codedifferently.hurt.DataHandler.Data@6193b845, com.codedifferently.hurt.DataHandler.Data@2e817b38, com.codedifferently.hurt.DataHandler.Data@c4437c4, com.codedifferently.hurt.DataHandler.Data@433c675d, com.codedifferently.hurt.DataHandler.Data@3f91beef, com.codedifferently.hurt.DataHandler.Data@1a6c5a9e, com.codedifferently.hurt.DataHandler.Data@37bba400], co0kies=[com.codedifferently.hurt.DataHandler.Data@179d3b25], apples=[com.codedifferently.hurt.DataHandler.Data@254989ff, com.codedifferently.hurt.DataHandler.Data@5d099f62, com.codedifferently.hurt.DataHandler.Data@37f8bb67, com.codedifferently.hurt.DataHandler.Data@49c2faae], cookies=[com.codedifferently.hurt.DataHandler.Data@20ad9418, com.codedifferently.hurt.DataHandler.Data@31cefde0, com.codedifferently.hurt.DataHandler.Data@439f5b3d, com.codedifferently.hurt.DataHandler.Data@1d56ce6a, com.codedifferently.hurt.DataHandler.Data@5197848c, com.codedifferently.hurt.DataHandler.Data@17f052a3, com.codedifferently.hurt.DataHandler.Data@2e0fa5d3]}
+Name:   bread          Seen: 6times
+================        ================
+Name:    milk           Seen: 8times
+================        ================
+Name: co0kies        Seen: 1times
+================        ================
+Name:  apples         Seen: 4times
+================        ================
+Name: cookies        Seen: 7times
+================        ================
