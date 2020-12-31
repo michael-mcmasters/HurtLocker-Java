@@ -21,7 +21,7 @@ public class DataHandler {
     }
 
     private List<Data> formatData(String rawData) {
-        return rawDataParser.formatData(rawData);
+        return rawDataParser.convertJSONToObject(rawData);
     }
 
     public void logDataToFile() {

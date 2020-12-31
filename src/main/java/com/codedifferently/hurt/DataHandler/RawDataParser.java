@@ -7,36 +7,36 @@ import java.util.List;
 
 public class RawDataParser implements IRawDataParser {
 
+    // Converts every line of the corrupted JSON file to a Data object. Returns all objects.
     @Override
-    public List<Data> formatData(String rawData) {
+    public List<Data> convertJSONToObject(String rawData) {
+        List<Data> dataList = new ArrayList<>();
+
         rawData = rawData.toLowerCase();
-        String[] dataArr = rawData.split("##");
-        for (String lineOfData : dataArr) {
-            List<String> properties = getProperties(lineOfData);
-            instantiateClass(properties);
-            System.out.println(properties);
+        String[] linesOfData = rawData.split("##");
+        for (String line : linesOfData) {
+            String[] properties = getProperties(line);
+            Data data = new Data(properties);
+            dataList.add(data);
         }
-        return null;
+        return dataList;
     }
 
-    private List<String> getProperties(String lineOfData) {
+    // Returns an array of properties for the corrupted JSON object.
+    // Use list instead of an array just in case there are more than 4 items.
+    private String[] getProperties(String lineOfData) {
         List<String> properties = new ArrayList<>();
 
-        String[] dataArr = lineOfData.split("(;|:|\\^|%|\\*|@|!)");
-        for (int i = 0; i < dataArr.length; i += 2) {
+        String[] keyAndPair = lineOfData.split("(;|:|\\^|%|\\*|@|!)");
+        for (int i = 0; i < keyAndPair.length; i += 2) {
             try {
-                properties.add(dataArr[i + 1]);
+                properties.add(keyAndPair[i + 1]);      // We only want the pair, so return every odd number.
             } catch (IndexOutOfBoundsException e) {
                 System.out.println(e);
                 break;
             }
         }
-        System.out.println("");
-        return properties;
-    }
-
-    private void instantiateClass(List<String> properties) {
-        //properties.get(0), properties.get(1), properties.get(2), properties.get(3)
-        //System.out.println(jsonStr);
+        // Converting a list to an array in Java. Source: https://stackoverflow.com/questions/4042434/converting-arrayliststring-to-string-in-java
+        return properties.stream().toArray(String[]::new);
     }
 }
