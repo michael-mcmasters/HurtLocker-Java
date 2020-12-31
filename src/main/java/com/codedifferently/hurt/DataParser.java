@@ -16,6 +16,8 @@ public class DataParser {
         }
         System.out.println(errors);
         System.out.println(indexErrorThrownAt);
+
+        DataBuilder.createLogFile();
     }
 
     private void createData(String str) {
@@ -26,8 +28,6 @@ public class DataParser {
             String data = m.group();
             DataBuilder.buildClass(data);
         }
-        DataBuilder.createLogFile();
-
         System.out.println("                  ");
     }
 

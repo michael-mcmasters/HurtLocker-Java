@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 public class DataBuilder {
 
@@ -45,10 +47,11 @@ public class DataBuilder {
         File file = new File("output2.txt");
 
         try {
-            String output = getPrintedText();
+            //String output = getData();
+            test(dataList);
 
             FileWriter writer = new FileWriter(file);
-            writer.write(output);
+//            writer.write(output);
             writer.flush();
             writer.close();
         } catch (IOException e) {
@@ -56,14 +59,23 @@ public class DataBuilder {
         }
     }
 
-    private static String getPrintedText() {
+    private static String getData() {
+        // Pair can be bread, milk, cookies etc.
+        // And then the price and how many times they appear.
+        class Pair {
+            String pair;
+            Map<String, Integer> prices;
+        }
+        List<Pair> pairs = new ArrayList<>();
+
         String output = "";
         Map<String, Integer> names = getAllNames();
         for (String name : names.keySet()) {
             System.out.println(name);
-            Map<String, Integer> prices = getAllPricesForNames(name);
-            System.out.println(names);
-            System.out.println(prices);
+            //Map<String, Integer> prices = getAllPricesForNames(name);
+            //Map<String, Integer> prices = getAllPricesForNames(dataList, name, s -> s.getPrice());
+//            System.out.println(names);
+//            System.out.println(prices);
         }
 //        for (Data data : dataList) {
 //            if (data.getName() == "") {
@@ -97,12 +109,13 @@ public class DataBuilder {
         return map;
     }
 
-    private static Map<String, Integer> getAllPricesForNames(String name) {
+    private static Map<String, Integer> getAllPricesForNames(List<Data> dataList, String name, Predicate<Data> p) {
         // Price, times appeared
         Map<String, Integer> map = new HashMap<>();
 
         for (Data data : dataList) {
-            if (data.getPrice() == "") continue;
+//            if (data.getName() != name || (p.))
+//                continue;
 
             if (map.containsKey(data.getPrice())) {
                 int timesAppeared = map.get(data.getPrice());
@@ -113,6 +126,36 @@ public class DataBuilder {
         }
         return map;
     }
+
+
+
+
+    private static void test(List<Data> dataList) {
+
+        System.out.println("test CALLED");
+
+        getInfoFor(dataList, "apples", new Function<Data, String>(){
+            public String apply(Data input) {
+                return input.getPrice();
+            }});
+    }
+
+
+    private static Map<String, Integer> getInfoFor(List<Data> dataList, String name, Function function) {
+        Map<String, Integer> map = new HashMap<>();
+
+        System.out.println("getInfoFor CALLED");
+        System.out.println("size is " + dataList.size());
+
+        for (Data data: dataList) {
+            System.out.println("looping");
+            if (function.apply(data) != "") {
+                System.out.println("DATA IS "+ function.apply(data));
+            }
+        }
+        return null;
+    }
+
 
 
 
