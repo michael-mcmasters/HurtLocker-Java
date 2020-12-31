@@ -8,7 +8,7 @@ public class DataParser {
     int errors = 0;
     int indexErrorThrownAt = 0;
 
-    public void build(String input) {
+    public void parse(String input) {
         input = input.toLowerCase();
         String[] strArr = input.split("##");
         for (String str : strArr) {
@@ -18,9 +18,10 @@ public class DataParser {
         System.out.println(indexErrorThrownAt);
     }
 
-    private void getData(String str) {
-        Matcher m = Pattern.compile("\\w+.*\\w+").matcher(str);
+    private String getData(String str) {
+        String result = "";
 
+        Matcher m = Pattern.compile("\\w+.*\\w+").matcher(str);
         while (m.find()) {
             String data = m.group();
             String[] dataArr = data.split("(;|:|\\^|%|\\*|@|!)");
@@ -28,6 +29,7 @@ public class DataParser {
             for (int i = 0; i < dataArr.length; i += 2) {
                 try {
                     System.out.println(dataArr[i] + ": " + dataArr[i + 1]);
+                    result =
                 } catch (IndexOutOfBoundsException e) {
                     errors++;
                     indexErrorThrownAt = i;

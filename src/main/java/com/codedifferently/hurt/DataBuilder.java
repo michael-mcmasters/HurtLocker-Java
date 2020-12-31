@@ -11,11 +11,18 @@ public class DataBuilder {
     List<Data> dataList = new ArrayList<>();
 
     public void buildClass(String input) {
-        //Data data = new Data();
+        String[] properties = getPair(input);
+
+        Data data = new Data("", "", "", "");
+        dataList.add(data);
+    }
+
+    private String[] getPair(String input) {
+        String[] properties = input.split(": ");
     }
 
     public void createLogFile(String data) throws IOException {
-        File file = new File("../../resources/log.txt");
+        File file = new File("../../../../../output.txt");
         FileWriter writer = new FileWriter(file);
         writer.write("our text here");
         writer.flush();

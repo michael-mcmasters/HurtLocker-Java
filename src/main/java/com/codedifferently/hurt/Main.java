@@ -17,6 +17,6 @@ public class Main {
         Main main = new Main();
         DataParser dp = new DataParser();
         String rawData = main.readRawDataToString();
-        dp.build(rawData);
+        dp.parse(rawData);
     }
 }
