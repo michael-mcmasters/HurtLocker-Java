@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -48,7 +47,7 @@ public class DataBuilder {
         File file = new File("output2.txt");
 
         try {
-            //String output = getData();
+            String output = getData();
             test(dataList);
 
             FileWriter writer = new FileWriter(file);
@@ -61,51 +60,35 @@ public class DataBuilder {
     }
 
     private static String getData() {
-        // Pair can be bread, milk, cookies etc.
-        // And then the price and how many times they appear.
-        class Pair {
-            String pair;
-            Map<String, Integer> prices;
-        }
-        List<Pair> pairs = new ArrayList<>();
-
         String output = "";
-        Map<String, Integer> names = getAllNames();
-        for (String name : names.keySet()) {
-            System.out.println(name);
-            //Map<String, Integer> prices = getAllPricesForNames(name);
-            //Map<String, Integer> prices = getAllPricesForNames(dataList, name, s -> s.getPrice());
-//            System.out.println(names);
-//            System.out.println(prices);
+        Map<String, List<Data>> names = getInstances();
+        System.out.println("begin loop");
+
+        for (List<Data> list : names.values()) {
+            //System.out.println(list);
+
+            //System.out.println("looping. printing instances");
+
+            for (Data data : list) {
+                System.out.println(data.getName());
+            }
         }
-//        for (Data data : dataList) {
-//            if (data.getName() == "") {
-//                System.out.println("YES THIS IS BROKEN");
-//                break;
-//            }
-//
-//            output += " " + data.getName();
-//            output += " " + data.getPrice();
-//            output += " " + data.getType();
-//            output += " " + data.getExpiration();
-//            output += "\n";
-//        }
         return output;
     }
 
-    private static Map<String, Integer> getAllNames() {
-        // Name, times appeared
-        Map<String, Integer> map = new HashMap<>();
+    // Names from the raw data. Meaning cookies, milk, bread, etc.
+    private static Map<String, List<Data>> getInstances() {
+        // Name, every class instance holding that name
+        Map<String, List<Data>> map = new HashMap<>();
 
         for (Data data : dataList) {
-            if (data.getName() == "") continue;
+            String name = data.getName();
+            if (name == "") continue;
+            if (!map.containsKey(name))
+                map.put(name, new ArrayList<>());
 
-            if (map.containsKey(data.getName())) {
-                int timesAppeared = map.get(data.getName());
-                map.put(data.getName(), ++timesAppeared);
-            } else {
-                map.put(data.getName(), 1);
-            }
+            List<Data> list = map.get(name);
+            list.add(data);
         }
         return map;
     }
@@ -130,16 +113,17 @@ public class DataBuilder {
 
 
     private static void test(List<Data> dataList) {
-        getInfoFor(dataList, "milk", data -> data.getPrice());
+        getProperties(dataList, data -> data.getPrice());
     }
 
 
-    private static Map<String, Integer> getInfoFor(List<Data> dataList, String name, Function<Data, String> function) {
+    // Lamda is getBread(), getPrice(), getType(), getExpiration().
+    private static Map<String, Integer> getProperties(List<Data> dataList, Function<Data, String> function) {
         Map<String, Integer> map = new HashMap<>();
 
         for (Data data : dataList) {
             if (function.apply(data) != "") {
-                System.out.println("DATA IS " + function.apply(data));
+//                System.out.println("DATA IS " + function.apply(data));
             }
         }
         return null;
