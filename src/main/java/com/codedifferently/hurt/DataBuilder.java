@@ -48,7 +48,6 @@ public class DataBuilder {
 
         try {
             String output = getData();
-            test(dataList);
 
             FileWriter writer = new FileWriter(file);
 //            writer.write(output);
@@ -65,13 +64,11 @@ public class DataBuilder {
         System.out.println("begin loop");
 
         for (List<Data> list : names.values()) {
-            //System.out.println(list);
-
-            //System.out.println("looping. printing instances");
-
             for (Data data : list) {
                 System.out.println(data.getName());
             }
+            getProperties(list, d -> d.getPrice());
+            System.out.println("_____");
         }
         return output;
     }
@@ -93,25 +90,6 @@ public class DataBuilder {
         return map;
     }
 
-    private static Map<String, Integer> getAllPricesForNames(List<Data> dataList, String name, Predicate<Data> p) {
-        // Price, times appeared
-        Map<String, Integer> map = new HashMap<>();
-
-        for (Data data : dataList) {
-//            if (data.getName() != name || (p.))
-//                continue;
-
-            if (map.containsKey(data.getPrice())) {
-                int timesAppeared = map.get(data.getPrice());
-                map.put(data.getPrice(), ++timesAppeared);
-            } else {
-                map.put(data.getPrice(), 1);
-            }
-        }
-        return map;
-    }
-
-
     private static void test(List<Data> dataList) {
         getProperties(dataList, data -> data.getPrice());
     }
@@ -123,7 +101,7 @@ public class DataBuilder {
 
         for (Data data : dataList) {
             if (function.apply(data) != "") {
-//                System.out.println("DATA IS " + function.apply(data));
+                System.out.println("Data is " + function.apply(data));
             }
         }
         return null;
