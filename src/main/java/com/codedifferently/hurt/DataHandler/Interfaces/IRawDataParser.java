@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface IRawDataParser {
 
-    public List<Data> formatData();
+    public List<Data> formatData(String rawData);
 
 }

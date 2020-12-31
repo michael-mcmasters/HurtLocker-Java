@@ -14,11 +14,14 @@ public class DataHandler {
     private IFileCreator fileCreator;
 
     public DataHandler(String rawData) {
+        rawDataParser = new RawDataParser();
+        dataParser = new DataParser();
+        fileCreator = new FileCreator();
         data = formatData(rawData);
     }
 
     private List<Data> formatData(String rawData) {
-        return null;
+        return rawDataParser.formatData(rawData);
     }
 
     public void logDataToFile() {
