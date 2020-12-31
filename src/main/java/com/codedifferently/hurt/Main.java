@@ -1,5 +1,6 @@
 package com.codedifferently.hurt;
 
+import com.codedifferently.hurt.DataHandler.DataHandler;
 import org.apache.commons.io.IOUtils;
 
 public class Main {
@@ -14,5 +15,7 @@ public class Main {
         String output = (new Main()).readRawDataToString();
         System.out.println(output);
 
+        DataHandler dataHandler = new DataHandler(output);
+        dataHandler.logDataToFile();
     }
 }
