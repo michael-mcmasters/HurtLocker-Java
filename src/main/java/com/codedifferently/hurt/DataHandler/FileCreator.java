@@ -6,6 +6,7 @@ import com.codedifferently.hurt.DataHandler.Interfaces.IFileCreator;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -79,10 +80,15 @@ public class FileCreator implements IFileCreator {
 
             // Prices
             Map<String, Integer> prices = dataParser.getPricesAndOccurences(list);
-            for (String key : prices.keySet()) {
-                System.out.println(key);
-                System.out.println(prices.get(key));
+            //boolean
+            Iterator iterator = prices.keySet().iterator();
+            while (iterator.hasNext()) {
+                iterator.next();
+                System.out.println(iterator.hasNext());
+            }
 
+
+            for (String key : prices.keySet()) {
                 String price = key;
                 String seen = prices.get(key).toString();
 
@@ -99,10 +105,13 @@ public class FileCreator implements IFileCreator {
                 output += addCharacter(" ", spacesBetweenColumns);
 
                 output += "\n";
+                output += addCharacter("-", totalCharsInColumn);
+                output += addCharacter(" ", spacesBetweenColumns);
+                output += addCharacter("-", totalCharsInColumn);
+                output += "\n";
 
             }
-            output += "\n\n";
-
+            output += "\n";
         }
 
         printToFile(output);
