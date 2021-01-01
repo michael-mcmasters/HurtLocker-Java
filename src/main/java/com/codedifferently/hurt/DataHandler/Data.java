@@ -21,7 +21,7 @@ public class Data {
         // This never happens for this project but I figured it would be a good edge case to check for in the real world.
         if (properties.length > 4) {
             System.out.println("Note! There were more properties than expected. Adding them to additionalProperties.");
-            for (int i = 3; i < properties.length; i++) {
+            for (int i = 4; i < properties.length; i++) {
                 additionalProperties.add(properties[i]);
             }
         }
