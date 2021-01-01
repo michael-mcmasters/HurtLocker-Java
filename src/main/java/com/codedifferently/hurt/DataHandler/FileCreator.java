@@ -40,34 +40,36 @@ public class FileCreator implements IFileCreator {
         // Pair is a list of instances of every Data object with that name property.
         Map<String, List<Data>> names = dataParser.getInstancesOfEveryName();
 
-        int charactersInFirstRow = 11;
-        int equalSymbols = charactersInFirstRow + 5; // because "seen:" and "name:" are each 5 characters long.
-        int spaces = 10;
+        int totalCharsInColumn = 15;
+        int spacesBetweenColumns = 10;
+        String nameColumnTitle = "Name:";
+        String seenColumnTitle = "Seen:";
+        String priceColumnTitle = "Price:";
 
         for (String name : names.keySet()) {
             List<Data> list = names.get(name);
-            int seen = list.size();
+            int seenAmount = list.size();
             Map<String, Integer> prices = dataParser.getPricesAndOccurences(list);
 
             // Row 1 Column 1 (Name)
-            output += "Name:";
-            output += addCharacter(" ", charactersInFirstRow - name.length());
+            output += nameColumnTitle;
+            output += addCharacter(" ", totalCharsInColumn - nameColumnTitle.length() - name.length());
             output += name;
-            output += addCharacter(" ", spaces);
+            output += addCharacter(" ", spacesBetweenColumns);
 
             // Row 1 Column 2 (Seen)
-            String seenTimes = seen + " times";
-            output += "Seen:";
-            output += addCharacter(" ", charactersInFirstRow - seenTimes.length());
+            output += seenColumnTitle;
+            String seenTimes = seenAmount + " times";
+            output += addCharacter(" ", totalCharsInColumn - seenColumnTitle.length() - seenTimes.length());
             output += seenTimes;
             output += "\n";
 
             // Row 2 Column 1 (====)
-            output += addCharacter("=", equalSymbols);
-            output += addCharacter(" ", spaces);
+            output += addCharacter("=", totalCharsInColumn);
+            output += addCharacter(" ", spacesBetweenColumns);
 
             // Row 2 Column 2 (====)
-            output += addCharacter("=", equalSymbols);
+            output += addCharacter("=", totalCharsInColumn);
             output += "\n";
 
         }
@@ -75,7 +77,8 @@ public class FileCreator implements IFileCreator {
         printToFile(output);
     }
 
-    // Returns a String with the given character added x amounts of times.
+    // Pass the character you want added, and how many times to add it.
+    // Returns String with the result.
     private String addCharacter(String charToAdd, int amount) {
         String characters = "";
         for (int i = 1; i <= amount; i++) {

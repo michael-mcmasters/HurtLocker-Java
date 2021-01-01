@@ -1,10 +1,10 @@
-Name:******bread          Seen:****6 times
-================          ================
-Name:*******milk          Seen:****8 times
-================          ================
-Name:****co0kies          Seen:****1 times
-================          ================
-Name:*****apples          Seen:****4 times
-================          ================
-Name:****cookies          Seen:****7 times
-================          ================
+Name:     bread          Seen:   6 times
+===============          ===============
+Name:      milk          Seen:   8 times
+===============          ===============
+Name:   co0kies          Seen:   1 times
+===============          ===============
+Name:    apples          Seen:   4 times
+===============          ===============
+Name:   cookies          Seen:   7 times
+===============          ===============
