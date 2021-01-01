@@ -6,9 +6,8 @@ import com.codedifferently.hurt.DataHandler.Interfaces.IFileCreator;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.function.Function;
 
 public class FileCreator implements IFileCreator {
 
@@ -80,12 +79,13 @@ public class FileCreator implements IFileCreator {
 
             // Prices
             Map<String, Integer> prices = dataParser.getPricesAndOccurences(list);
-            //boolean
-            Iterator iterator = prices.keySet().iterator();
-            while (iterator.hasNext()) {
-                iterator.next();
-                System.out.println(iterator.hasNext());
+
+            String[] sortedKeys = getSortedKeys(prices);
+            for (String s : sortedKeys) {
+                System.out.println(s);
             }
+            System.out.println("\n");
+
 
 
             for (String key : prices.keySet()) {
@@ -115,6 +115,20 @@ public class FileCreator implements IFileCreator {
         }
 
         printToFile(output);
+    }
+
+    // Converts keys to floats, sorts from greatest to lowest, then returns back as a String array.
+    private String[] getSortedKeys(Map<String, Integer> map) {
+        Float[] floats = new Float[map.keySet().size()];
+        int index = 0;
+        for (String k : map.keySet()) {
+            floats[index] = Float.parseFloat(k);
+            index++;
+        }
+        Arrays.sort(floats, Collections.reverseOrder());
+
+        String[] strings = Arrays.stream(floats).map(String::valueOf).toArray(String[]::new);
+        return strings;
     }
 
     // Pass the character you want added, and how many times to add it.
