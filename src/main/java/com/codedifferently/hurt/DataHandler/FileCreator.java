@@ -50,6 +50,7 @@ public class FileCreator implements IFileCreator {
         for (String name : names.keySet()) {
             List<Data> list = names.get(name);
             int seenAmount = list.size();
+            name = capitalizeFirstLetter(name);
 
             // Row 1 Column 1 (Name)
             output += nameColumnTitle;
@@ -82,7 +83,7 @@ public class FileCreator implements IFileCreator {
             Map<String, Integer> prices = dataParser.getPricesAndOccurences(list);
             String[] sortedPrices = getSortedPrices(prices);
 
-            boolean addDottedLine = true;
+            boolean addDottedLine = true;       // (Dotted line is only added after every other price).
             for (String price: sortedPrices) {
                 String seen = prices.get(price).toString();
 
@@ -94,14 +95,13 @@ public class FileCreator implements IFileCreator {
 
                 // Row 3 Column 2 (Seen)
                 output += seenColumnTitle;
-                seenTimesStr = seen + "times";
+                seenTimesStr = seen + " times";
                 output += addCharacter(" ", columnWidth - seenColumnTitle.length() - seenTimesStr.length());
                 output += seenTimesStr;
                 output += addCharacter(" ", widthBetweenColumns);
                 output += "\n";
 
                 // Row 4 Column 1 and Column 2 (----)
-                // (Dotted line is only added after every other price).
                 if (addDottedLine) {
                     output += addCharacter("-", columnWidth);
                     output += addCharacter(" ", widthBetweenColumns);
@@ -124,6 +124,10 @@ public class FileCreator implements IFileCreator {
             characters += charToAdd;
         }
         return characters;
+    }
+
+    private String capitalizeFirstLetter(String str) {
+        return str.substring(0, 1).toUpperCase() + str.substring(1);
     }
 
     // Returns keys sorted from greatest to lowest in numerical order.
