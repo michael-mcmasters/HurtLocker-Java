@@ -39,8 +39,10 @@ public class FileCreator implements IFileCreator {
         // Pair is a list of instances of every Data object with that name property.
         Map<String, List<Data>> names = dataParser.getInstancesOfEveryName();
 
-        int totalCharsInColumn = 15;
-        int spacesBetweenColumns = 10;
+        // Every unit is one empty char
+        int columnWidth = 13;
+        int widthBetweenColumns = 13;
+
         String nameColumnTitle = "Name:";
         String seenColumnTitle = "Seen:";
         String priceColumnTitle = "Price:";
@@ -51,14 +53,14 @@ public class FileCreator implements IFileCreator {
 
             // Row 1 Column 1 (Name)
             output += nameColumnTitle;
-            output += addCharacter(" ", totalCharsInColumn - nameColumnTitle.length() - name.length());
+            output += addCharacter(" ", columnWidth - nameColumnTitle.length() - name.length());
             output += name;
-            output += addCharacter(" ", spacesBetweenColumns);
+            output += addCharacter(" ", widthBetweenColumns);
 
             // Row 1 Column 2 (Seen)
             output += seenColumnTitle;
             String seenTimesStr = seenAmount + " times";
-            output += addCharacter(" ", totalCharsInColumn - seenColumnTitle.length() - seenTimesStr.length());
+            output += addCharacter(" ", columnWidth - seenColumnTitle.length() - seenTimesStr.length());
             output += seenTimesStr;
             output += "\n";
 
@@ -66,58 +68,52 @@ public class FileCreator implements IFileCreator {
 
 
             // Row 2 Column 1 (====)
-            output += addCharacter("=", totalCharsInColumn);
-            output += addCharacter(" ", spacesBetweenColumns);
+            output += addCharacter("=", columnWidth);
+            output += addCharacter(" ", widthBetweenColumns);
 
             // Row 2 Column 2 (====)
-            output += addCharacter("=", totalCharsInColumn);
+            output += addCharacter("=", columnWidth);
             output += "\n";
 
 
 
 
-            // Prices
+            // Row 3 - Print all prices with a dotted line underneath.
             Map<String, Integer> prices = dataParser.getPricesAndOccurences(list);
             String[] sortedPrices = getSortedPrices(prices);
 
+            boolean addDottedLine = true;
             for (String price: sortedPrices) {
                 String seen = prices.get(price).toString();
 
                 // Row 3 Column 1 (Price)
                 output += priceColumnTitle;
-                output += addCharacter(" ", totalCharsInColumn - priceColumnTitle.length() - price.length());
+                output += addCharacter(" ", columnWidth - priceColumnTitle.length() - price.length());
                 output += price;
-                output += addCharacter(" ", spacesBetweenColumns);
+                output += addCharacter(" ", widthBetweenColumns);
 
                 // Row 3 Column 2 (Seen)
                 output += seenColumnTitle;
-                output += addCharacter(" ", totalCharsInColumn - seenColumnTitle.length() - seen.length());
-                output += seen;
-                output += addCharacter(" ", spacesBetweenColumns);
+                seenTimesStr = seen + "times";
+                output += addCharacter(" ", columnWidth - seenColumnTitle.length() - seenTimesStr.length());
+                output += seenTimesStr;
+                output += addCharacter(" ", widthBetweenColumns);
+                output += "\n";
 
-                output += "\n";
-                output += addCharacter("-", totalCharsInColumn);
-                output += addCharacter(" ", spacesBetweenColumns);
-                output += addCharacter("-", totalCharsInColumn);
-                output += "\n";
+                // Row 4 Column 1 and Column 2 (----)
+                // (Dotted line is only added after every other price).
+                if (addDottedLine) {
+                    output += addCharacter("-", columnWidth);
+                    output += addCharacter(" ", widthBetweenColumns);
+                    output += addCharacter("-", columnWidth);
+                    output += "\n";
+                }
+                addDottedLine = !addDottedLine;
             }
             output += "\n";
         }
 
         printToFile(output);
-    }
-
-    // Converts keys to floats, sorts from greatest to lowest, then returns back as a String array.
-    private String[] getSortedPrices(Map<String, Integer> map) {
-        Float[] floats = new Float[map.keySet().size()];
-        int index = 0;
-        for (String k : map.keySet()) {
-            floats[index] = Float.parseFloat(k);
-            index++;
-        }
-        Arrays.sort(floats, Collections.reverseOrder());
-
-        return Arrays.stream(floats).map(String::valueOf).toArray(String[]::new);
     }
 
     // Pass the character you want added, and how many times to add it.
@@ -128,6 +124,18 @@ public class FileCreator implements IFileCreator {
             characters += charToAdd;
         }
         return characters;
+    }
+
+    // Returns keys sorted from greatest to lowest in numerical order.
+    private String[] getSortedPrices(Map<String, Integer> map) {
+        Float[] floats = new Float[map.keySet().size()];
+        int index = 0;
+        for (String k : map.keySet()) {
+            floats[index] = Float.parseFloat(k);
+            index++;
+        }
+        Arrays.sort(floats, Collections.reverseOrder());
+        return Arrays.stream(floats).map(String::valueOf).toArray(String[]::new);
     }
 
     private void printToFile(String output) {
