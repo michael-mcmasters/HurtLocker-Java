@@ -16,7 +16,7 @@ public class Data {
         this.price = properties[1];
         this.type = properties[2];
         this.expiration = properties[3];
-        additionalProperties = new ArrayList<>();
+        this.additionalProperties = new ArrayList<>();
 
         // This never happens for this project but I figured it would be a good edge case to check for in the real world.
         if (properties.length > 4) {

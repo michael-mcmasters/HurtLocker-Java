@@ -42,6 +42,23 @@ public class DataParser implements IDataParser {
         return map;
     }
 
+    // Helper methods for if you don't want to pass a lambda.
+    public Map<String, Integer> getNamesAndOccurences(List<Data> dataList) {
+        return getPropertyAndOccurences(dataList, data -> data.name);
+    }
+
+    public Map<String, Integer> getPricesAndOccurences(List<Data> dataList) {
+        return getPropertyAndOccurences(dataList, data -> data.price);
+    }
+
+    public Map<String, Integer> getTypesAndOccurences(List<Data> dataList) {
+        return getPropertyAndOccurences(dataList, data -> data.type);
+    }
+
+    public Map<String, Integer> getExpirationsAndOccurences(List<Data> dataList) {
+        return getPropertyAndOccurences(dataList, data -> data.expiration);
+    }
+
     // Returns every property of the given type (name, price, etc), and how many times it appeared.
     // (Pass a lambda for the property you want to get. This way we don't need to re-create this function for every property the object has.)
     public Map<String, Integer> getPropertyAndOccurences(List<Data> dataList, Function<Data, String> function) {
@@ -59,23 +76,6 @@ public class DataParser implements IDataParser {
             }
         }
         return map;
-    }
-
-    // Helper methods for if you don't want to pass a lambda.
-    public Map<String, Integer> getNamesAndOccurences(List<Data> dataList) {
-        return getPropertyAndOccurences(dataList, data -> data.name);
-    }
-
-    public Map<String, Integer> getPricesAndOccurences(List<Data> dataList) {
-        return getPropertyAndOccurences(dataList, data -> data.price);
-    }
-
-    public Map<String, Integer> getTypesAndOccurences(List<Data> dataList) {
-        return getPropertyAndOccurences(dataList, data -> data.type);
-    }
-
-    public Map<String, Integer> getExpirationsAndOccurences(List<Data> dataList) {
-        return getPropertyAndOccurences(dataList, data -> data.expiration);
     }
 
     public void getHowManyTimesAppears() {
