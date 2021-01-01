@@ -36,60 +36,52 @@ public class FileCreator implements IFileCreator {
 
         String output = "";
 
-        Map<String, List<Data>> names = dataParser.getInstancesOfEveryName();
-
         // Name is the key (milk, bread, etc).
         // Pair is a list of instances of every Data object with that name property.
+        Map<String, List<Data>> names = dataParser.getInstancesOfEveryName();
+
+        int charactersInFirstRow = 11;
+        int equalSymbols = charactersInFirstRow + 5; // because "seen:" and "name:" are each 5 characters long.
+        int spaces = 10;
+
         for (String name : names.keySet()) {
             List<Data> list = names.get(name);
             int seen = list.size();
             Map<String, Integer> prices = dataParser.getPricesAndOccurences(list);
 
-            output += "Name:    ";
+            // Row 1 Column 1 (Name)
+            output += "Name:";
+            output += addCharacter(" ", charactersInFirstRow - name.length());
             output += name;
+            output += addCharacter(" ", spaces);
 
-            output += addSpaces(8 - name.length());
-            output += "       ";
-
-            output += "Seen: " + seen + "times";
-
-            output += "\n";
-            output += "================";
-
-            output += "        ";
-            output += "================";
+            // Row 1 Column 2 (Seen)
+            String seenTimes = seen + " times";
+            output += "Seen:";
+            output += addCharacter(" ", charactersInFirstRow - seenTimes.length());
+            output += seenTimes;
             output += "\n";
 
-            System.out.printf("%-30.30s  %-30.30s%n", "Name:", name);
-            System.out.println(String.format("Name: %10s %10s %-10s", name, " ", name));
-            System.out.println(String.format("Name: %10s %10s %-10s", name, " ", name));
-            System.out.println(String.format("================= %10s =================", " "));
-            System.out.println(String.format( "%5s of %-8s", name, name));
-            System.out.println("\n\n\n");
+            // Row 2 Column 1 (====)
+            output += addCharacter("=", equalSymbols);
+            output += addCharacter(" ", spaces);
+
+            // Row 2 Column 2 (====)
+            output += addCharacter("=", equalSymbols);
+            output += "\n";
 
         }
-
-        // - symbol pushes things on right away
-        System.out.printf("%-22s%-22s%-22s\n","Column 1","Column 2","Column 3");
-        System.out.printf("%-22s%-22s%-22s\n","v1", "v222", "v33333");
-        System.out.printf("%-22s22%s%-22s%-22s\n","v1", "v3", "v222", "v33333");
-
-//        System.out.printf("%-10s %-10s %-10s\n", "osne", "two", "thredsfe");
-//        System.out.printf("%-10s %-10s %-10s\n", "one", "tdsfwo", "thsdfree");
-//        System.out.printf("%-10s %-10s %-10s\n", "onsdfe", "twdfo", "three");
-//        System.out.printf("%-10s %-10s %-10s\n", "odsfne", "twsdfo", "thdfree");
-//        System.out.printf("%-10s %-10s %-10s\n", "osdne", "twdfo", "three");
-//        System.out.printf("%-10s %-10s %-10s\n", "odsfne", "tdfwo", "three");
 
         printToFile(output);
     }
 
-    private String addSpaces(int numOfSpaces) {
-        String spaces = "";
-        for (int i = 1; i <= numOfSpaces; i++) {
-            spaces += " ";
+    // Returns a String with the given character added x amounts of times.
+    private String addCharacter(String charToAdd, int amount) {
+        String characters = "";
+        for (int i = 1; i <= amount; i++) {
+            characters += charToAdd;
         }
-        return spaces;
+        return characters;
     }
 
     private void printToFile(String output) {

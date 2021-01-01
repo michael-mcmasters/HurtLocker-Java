@@ -30,7 +30,7 @@ public class RawDataParser implements IRawDataParser {
         String[] keyAndPair = lineOfData.split("(;|:|\\^|%|\\*|@|!)");
         for (int i = 0; i < keyAndPair.length; i += 2) {
             try {
-                properties.add(keyAndPair[i + 1]);      // We only want the pair, so return every odd number.
+                properties.add(keyAndPair[i + 1].trim());      // We only want the pair, so return every odd number.
             } catch (IndexOutOfBoundsException e) {
                 System.out.println(e);
                 break;
