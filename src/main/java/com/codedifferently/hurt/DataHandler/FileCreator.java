@@ -7,7 +7,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
-import java.util.function.Function;
 
 public class FileCreator implements IFileCreator {
 
@@ -79,18 +78,10 @@ public class FileCreator implements IFileCreator {
 
             // Prices
             Map<String, Integer> prices = dataParser.getPricesAndOccurences(list);
+            String[] sortedPrices = getSortedPrices(prices);
 
-            String[] sortedKeys = getSortedKeys(prices);
-            for (String s : sortedKeys) {
-                System.out.println(s);
-            }
-            System.out.println("\n");
-
-
-
-            for (String key : prices.keySet()) {
-                String price = key;
-                String seen = prices.get(key).toString();
+            for (String price: sortedPrices) {
+                String seen = prices.get(price).toString();
 
                 // Row 3 Column 1 (Price)
                 output += priceColumnTitle;
@@ -109,7 +100,6 @@ public class FileCreator implements IFileCreator {
                 output += addCharacter(" ", spacesBetweenColumns);
                 output += addCharacter("-", totalCharsInColumn);
                 output += "\n";
-
             }
             output += "\n";
         }
@@ -118,7 +108,7 @@ public class FileCreator implements IFileCreator {
     }
 
     // Converts keys to floats, sorts from greatest to lowest, then returns back as a String array.
-    private String[] getSortedKeys(Map<String, Integer> map) {
+    private String[] getSortedPrices(Map<String, Integer> map) {
         Float[] floats = new Float[map.keySet().size()];
         int index = 0;
         for (String k : map.keySet()) {
@@ -127,8 +117,7 @@ public class FileCreator implements IFileCreator {
         }
         Arrays.sort(floats, Collections.reverseOrder());
 
-        String[] strings = Arrays.stream(floats).map(String::valueOf).toArray(String[]::new);
-        return strings;
+        return Arrays.stream(floats).map(String::valueOf).toArray(String[]::new);
     }
 
     // Pass the character you want added, and how many times to add it.
