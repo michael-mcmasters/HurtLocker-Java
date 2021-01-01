@@ -18,21 +18,6 @@ public class FileCreator implements IFileCreator {
 
     @Override
     public void createLogFile() {
-
-//        Map<String, List<Data>> names = dataParser.getInstancesOfEveryName();
-//        for (String namesKey : names.keySet()) {
-//            System.out.println("__"+ namesKey + "__");
-//
-//            List<Data> list = names.get(namesKey);
-//            int seen = list.size();
-//
-//            System.out.println("Times appeared: " + seen);
-//            Map<String, Integer> prices = dataParser.getPricesAndOccurences(list);
-//            System.out.println("Prices: " + prices);
-//            System.out.println("\n");
-//        }
-
-
         String output = "";
 
         // Name is the key (milk, bread, etc).
@@ -41,7 +26,7 @@ public class FileCreator implements IFileCreator {
 
         // Every unit is one empty char
         int columnWidth = 13;
-        int widthBetweenColumns = 13;
+        int widthBetweenColumns = 8;
 
         String nameColumnTitle = "Name:";
         String seenColumnTitle = "Seen:";

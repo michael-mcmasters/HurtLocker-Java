@@ -1,22 +1,22 @@
-Name:   Bread             Seen: 6 times
-=============             =============
-Price:   1.23             Seen: 6 times             
--------------             -------------
+Name:   Bread        Seen: 6 times
+=============        =============
+Price:   1.23        Seen: 6 times        
+-------------        -------------
 
-Name:    Milk             Seen: 8 times
-=============             =============
-Price:   3.23             Seen: 5 times             
--------------             -------------
-Price:   1.23             Seen: 1 times             
+Name:    Milk        Seen: 8 times
+=============        =============
+Price:   3.23        Seen: 5 times        
+-------------        -------------
+Price:   1.23        Seen: 1 times        
 
-Name:  Apples             Seen: 4 times
-=============             =============
-Price:   0.25             Seen: 2 times             
--------------             -------------
-Price:   0.23             Seen: 2 times             
+Name:  Apples        Seen: 4 times
+=============        =============
+Price:   0.25        Seen: 2 times        
+-------------        -------------
+Price:   0.23        Seen: 2 times        
 
-Name: Cookies             Seen: 8 times
-=============             =============
-Price:   2.25             Seen: 8 times             
--------------             -------------
+Name: Cookies        Seen: 8 times
+=============        =============
+Price:   2.25        Seen: 8 times        
+-------------        -------------
 

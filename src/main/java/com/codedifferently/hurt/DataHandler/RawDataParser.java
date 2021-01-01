@@ -29,10 +29,11 @@ public class RawDataParser implements IRawDataParser {
     private String[] getProperties(String lineOfData) {
         List<String> properties = new ArrayList<>();
 
-        String[] keyAndPair = lineOfData.split("(;|:|\\^|%|\\*|@|!)");
-        for (int i = 0; i < keyAndPair.length; i += 2) {
+        // We only want the pair, so loop through ever odd number.
+        String[] keysAndPairs = lineOfData.split("(;|:|\\^|%|\\*|@|!)");
+        for (int i = 1; i < keysAndPairs.length; i += 2) {
             try {
-                properties.add(keyAndPair[i + 1].trim());      // We only want the pair, so return every odd number.
+                properties.add(keysAndPairs[i].trim());
             } catch (IndexOutOfBoundsException e) {
                 System.out.println(e);
                 break;
