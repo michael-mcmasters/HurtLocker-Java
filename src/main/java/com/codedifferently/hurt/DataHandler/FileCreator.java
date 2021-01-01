@@ -49,7 +49,6 @@ public class FileCreator implements IFileCreator {
         for (String name : names.keySet()) {
             List<Data> list = names.get(name);
             int seenAmount = list.size();
-            Map<String, Integer> prices = dataParser.getPricesAndOccurences(list);
 
             // Row 1 Column 1 (Name)
             output += nameColumnTitle;
@@ -59,10 +58,13 @@ public class FileCreator implements IFileCreator {
 
             // Row 1 Column 2 (Seen)
             output += seenColumnTitle;
-            String seenTimes = seenAmount + " times";
-            output += addCharacter(" ", totalCharsInColumn - seenColumnTitle.length() - seenTimes.length());
-            output += seenTimes;
+            String seenTimesStr = seenAmount + " times";
+            output += addCharacter(" ", totalCharsInColumn - seenColumnTitle.length() - seenTimesStr.length());
+            output += seenTimesStr;
             output += "\n";
+
+
+
 
             // Row 2 Column 1 (====)
             output += addCharacter("=", totalCharsInColumn);
@@ -71,6 +73,35 @@ public class FileCreator implements IFileCreator {
             // Row 2 Column 2 (====)
             output += addCharacter("=", totalCharsInColumn);
             output += "\n";
+
+
+
+
+            // Prices
+            Map<String, Integer> prices = dataParser.getPricesAndOccurences(list);
+            for (String key : prices.keySet()) {
+                System.out.println(key);
+                System.out.println(prices.get(key));
+
+                String price = key;
+                String seen = prices.get(key).toString();
+
+                // Row 3 Column 1 (Price)
+                output += priceColumnTitle;
+                output += addCharacter(" ", totalCharsInColumn - priceColumnTitle.length() - price.length());
+                output += price;
+                output += addCharacter(" ", spacesBetweenColumns);
+
+                // Row 3 Column 2 (Seen)
+                output += seenColumnTitle;
+                output += addCharacter(" ", totalCharsInColumn - seenColumnTitle.length() - seen.length());
+                output += seen;
+                output += addCharacter(" ", spacesBetweenColumns);
+
+                output += "\n";
+
+            }
+            output += "\n\n";
 
         }
 
