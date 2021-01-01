@@ -42,49 +42,27 @@ public class RawDataParser implements IRawDataParser {
         return properties.stream().toArray(String[]::new);
     }
 
-//    // Renames property if it closely resembles another property.
-//    private String[] fuzzyMatchProperties(String[] properties, List<Data> dataList) {
-//        if (properties[0] == "co0kies") {
-//            System.out.println("cookies");
-//            return null;
-//        }
-//
-//        fuzzyMatchProperty(properties[0], dataList);
-//
-//        // If a word is 4 or less characters long it is probably too small to fuzzy match.
-//        return properties;
-//    }
-//
-//    private String fuzzyMatchProperty(String a, String b, Function<String, String> function) {
-//        String property =
-//
-//        if (properties[0].length() < 5) return properties;
-//
-//        for (Data data : dataList) {
-//            if (data.name.length() >= 5 && getMatchingCharCount(properties[0], data.name) >= 5) {
-//                properties[0] = data.name;
-//                System.out.println("YEYEYEYEYEYSYSYS");
-//            }
-//        }
-//    }
 
+
+
+    // Renames property if it closely resembles another property.
     private String[] fuzzyMatchProperties(String[] properties, List<Data> dataList) {
         for (Data data : dataList) {
+            // Only match name and type properties because price and date are too similar and will return false positives.
             properties[0] = fuzzyMatchProperty(properties[0], data.name);
             properties[2] = fuzzyMatchProperty(properties[2], data.type);
         }
         return properties;
     }
 
-    private String fuzzyMatchProperty(String property, String otherProperty) {
-        // 3 characters is not enough to fuzzy match.
-        if (property.length() < 4) return property;
+    private String fuzzyMatchProperty(String newProperty, String existingProperty) {
+        // 3 characters is not enough information to fuzzy match.
+        if (newProperty.length() < 4) return newProperty;
 
-        int matchingChars = getMatchingCharCount(property, otherProperty);
-        if (matchingChars >=4) {
-            return otherProperty;
+        if (getMatchingCharCount(newProperty, existingProperty) >= 4) {
+            return existingProperty;
         }
-        return property;
+        return newProperty;
     }
 
     private int getMatchingCharCount(String aStr, String bStr) {
