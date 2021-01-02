@@ -49,7 +49,7 @@ public class FileCreator implements IFileCreator {
 
             // Row 1 Column 2 (Seen)
             output += seenColumnTitle;
-            String seenTimesStr = seenAmount + " times";
+            String seenTimesStr = seenAmount + getTimesPlurality(seenAmount);
             output += addCharacter(" ", columnWidth - seenColumnTitle.length() - seenTimesStr.length());
             output += seenTimesStr;
             output += "\n";
@@ -84,7 +84,7 @@ public class FileCreator implements IFileCreator {
 
                 // Row 3 Column 2 (Seen)
                 output += seenColumnTitle;
-                seenTimesStr = seen + " times";
+                seenTimesStr = seen + getTimesPlurality(seen);
                 output += addCharacter(" ", columnWidth - seenColumnTitle.length() - seenTimesStr.length());
                 output += seenTimesStr;
                 output += addCharacter(" ", widthBetweenColumns);
@@ -110,7 +110,7 @@ public class FileCreator implements IFileCreator {
 
         // Error Row, Column 2
         output += seenColumnTitle;
-        String seenTimesStr = errors + " times";
+        String seenTimesStr = errors + getTimesPlurality(errors);
         output += addCharacter(" ", columnWidth - seenColumnTitle.length() - seenTimesStr.length());
         output += seenTimesStr;
         output += "\n";
@@ -127,7 +127,7 @@ public class FileCreator implements IFileCreator {
 
         // Fuzzy Match Row, Column 2
         output += seenColumnTitle;
-        String seenFuzzyMatchesStr = fuzzyMatches + " times";
+        String seenFuzzyMatchesStr = fuzzyMatches + getTimesPlurality(fuzzyMatches);
         output += addCharacter(" ", columnWidth - seenColumnTitle.length() - seenFuzzyMatchesStr.length());
         output += seenFuzzyMatchesStr;
 
@@ -160,6 +160,17 @@ public class FileCreator implements IFileCreator {
         }
         Arrays.sort(floats, Collections.reverseOrder());
         return Arrays.stream(floats).map(String::valueOf).toArray(String[]::new);
+    }
+
+    private String getTimesPlurality(String sizeStr) {
+        return getTimesPlurality(Integer.parseInt(sizeStr));
+    }
+
+    private String getTimesPlurality(int size) {
+        if (size > 1) {
+            return " times";
+        }
+        return " time ";
     }
 
     private void printToFile(String output) {

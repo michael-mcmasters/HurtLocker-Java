@@ -7,7 +7,7 @@ Name:    Milk        Seen: 8 times
 =============        =============
 Price:   3.23        Seen: 5 times        
 -------------        -------------
-Price:   1.23        Seen: 1 times        
+Price:   1.23        Seen: 1 time         
 
 Name:  Apples        Seen: 4 times
 =============        =============
@@ -21,4 +21,4 @@ Price:   2.25        Seen: 8 times
 -------------        -------------
 
 Errors               Seen: 4 times
-Fuzzy Matches        Seen: 1 times
+Fuzzy Matches        Seen: 1 time 
