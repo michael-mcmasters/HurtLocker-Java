@@ -21,3 +21,4 @@ Price:   2.25        Seen: 8 times
 -------------        -------------
 
 Errors               Seen: 4 times
+Fuzzy Matches        Seen: 1 times

@@ -33,6 +33,9 @@ public class FileCreator implements IFileCreator {
         String seenColumnTitle = "Seen:";
         String priceColumnTitle = "Price:";
 
+        String errorsRowTitle = "Errors";
+        String fuzzyMatchesRowTitle = "Fuzzy Matches";
+
         for (String name : names.keySet()) {
             List<Data> list = names.get(name);
             int seenAmount = list.size();
@@ -101,8 +104,8 @@ public class FileCreator implements IFileCreator {
 
         // Error Row, Column 1
         int errors = dataParser.getEmptyPropertyCount();
-        output += "Errors";
-        output += addCharacter(" ", columnWidth - "Errors".length());
+        output += errorsRowTitle;
+        output += addCharacter(" ", columnWidth - errorsRowTitle.length());
         output += addCharacter(" ", widthBetweenColumns);
 
         // Error Row, Column 2
@@ -110,12 +113,24 @@ public class FileCreator implements IFileCreator {
         String seenTimesStr = errors + " times";
         output += addCharacter(" ", columnWidth - seenColumnTitle.length() - seenTimesStr.length());
         output += seenTimesStr;
+        output += "\n";
 
 
 
-        // Fuzzy Matched Row, Column 1
+
+        // Fuzzy Match Row, Column 1
         int fuzzyMatches = dataParser.getFuzzyMatchCount();
         System.out.println(fuzzyMatches);
+        output += fuzzyMatchesRowTitle;
+        output += addCharacter(" ", columnWidth - fuzzyMatchesRowTitle.length());
+        output += addCharacter(" ", widthBetweenColumns);
+
+        // Fuzzy Match Row, Column 2
+        output += seenColumnTitle;
+        String seenFuzzyMatchesStr = fuzzyMatches + " times";
+        output += addCharacter(" ", columnWidth - seenColumnTitle.length() - seenFuzzyMatchesStr.length());
+        output += seenFuzzyMatchesStr;
+
 
 
         printToFile(output);
