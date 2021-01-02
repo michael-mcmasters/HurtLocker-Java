@@ -37,6 +37,7 @@ public class FileCreator implements IFileCreator {
         return createLogFile(columnWidth, widthBetweenColumns, nameColumnTitle, seenColumnTitle, priceColumnTitle, errorsRowTitle, fuzzyMatchesRowTitle);
     }
 
+    @Override
     // Generate report with the given criteria.
     // Returns true if file was created.
     public boolean createLogFile(int columnWidth, int widthBetweenColumns, String nameColumnTitle, String seenColumnTitle,
@@ -64,7 +65,7 @@ public class FileCreator implements IFileCreator {
 
 
     // Returns the text that will display in the file.
-    public String generateOutput(int columnWidth, int widthBetweenColumns, String nameColumnTitle, String seenColumnTitle,
+    private String generateOutput(int columnWidth, int widthBetweenColumns, String nameColumnTitle, String seenColumnTitle,
                                  String priceColumnTitle, String errorsRowTitle, String fuzzyMatchesRowTitle) {
         // Use String instead of StringBuffer to make code more readable.
         String output = "";

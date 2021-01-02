@@ -44,6 +44,7 @@ public class DataParser implements IDataParser {
         return instances;
     }
 
+    @Override
     // Returns every found value in the given list and how many times it occurred.
     // The type of Value is the property passed as a lambda (name, price, expiration, etc).
     // (Use lambda so code doesn't need to be repeated for every property.)
@@ -64,23 +65,28 @@ public class DataParser implements IDataParser {
         return occurences;
     }
 
+    @Override
     // Helper methods for if you don't want to pass a lambda.
     public Map<String, Integer> getNamesAndOccurences(List<Data> dataList) {
         return getPropertyAndOccurences(dataList, data -> data.name);
     }
 
+    @Override
     public Map<String, Integer> getPricesAndOccurences(List<Data> dataList) {
         return getPropertyAndOccurences(dataList, data -> data.price);
     }
 
+    @Override
     public Map<String, Integer> getTypesAndOccurences(List<Data> dataList) {
         return getPropertyAndOccurences(dataList, data -> data.type);
     }
 
+    @Override
     public Map<String, Integer> getExpirationsAndOccurences(List<Data> dataList) {
         return getPropertyAndOccurences(dataList, data -> data.expiration);
     }
 
+    @Override
     public int getFuzzyMatchCount() {
         int counter = 0;
         for (Data data : dataList) {
