@@ -1,4 +1,4 @@
-Name:    Milk        Seen: 8 times
+Name:    Milk        Seen: 6 times
 =============        =============
 Price:   3.23        Seen: 5 times        
 -------------        -------------
@@ -21,5 +21,5 @@ Price:   0.25        Seen: 2 times
 Price:   0.23        Seen: 2 times        
 
 
-Errors               Seen: 4 times
+Errors               Seen: 0 time 
 Fuzzy Matches        Seen: 1 time 
