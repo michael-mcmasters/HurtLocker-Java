@@ -32,4 +32,8 @@ public class DataHandler {
     public IDataParser getDataParser() {
         return dataParser;
     }
+
+    public IFileCreator getFileCreator() {
+        return fileCreator;
+    }
 }

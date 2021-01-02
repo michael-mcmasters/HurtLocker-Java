@@ -160,7 +160,6 @@ public class FileCreator implements IFileCreator {
 
         // Fuzzy Match Row, Column 1
         int fuzzyMatches = dataParser.getFuzzyMatchCount();
-        System.out.println(fuzzyMatches);
         output += fuzzyMatchesRowTitle;
         output += addCharacter(" ", columnWidth - fuzzyMatchesRowTitle.length());
         output += addCharacter(" ", widthBetweenColumns);
