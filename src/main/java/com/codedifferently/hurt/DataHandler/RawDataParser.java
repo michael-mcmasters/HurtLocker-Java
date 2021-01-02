@@ -44,7 +44,7 @@ public class RawDataParser implements IRawDataParser {
         return properties.stream().toArray(String[]::new);
     }
 
-    // Renames property if it closely resembles another property. Returns same properties otherwise.
+    // Renames property if it closely resembles another property from other objects. Returns same properties otherwise.
     private String[] fuzzyMatchProperties(String[] parsedProperties, List<Data> dataList) {
         String[] properties = Arrays.copyOf(parsedProperties, parsedProperties.length);
         for (Data data : dataList) {

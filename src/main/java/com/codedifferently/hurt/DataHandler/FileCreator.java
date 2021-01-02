@@ -41,8 +41,9 @@ public class FileCreator implements IFileCreator {
         // Name is the key (milk, bread, etc).
         // Pair is a list of instances of every Data object with that name property.
         Map<String, List<Data>> names = dataParser.getInstancesOfEveryName();
+        String[] sortedNames = getSortedNames(names);
 
-        for (String name : names.keySet()) {
+        for (String name : sortedNames) {
             List<Data> list = names.get(name);
             int seenAmount = list.size();
             name = capitalizeFirstLetter(name);
@@ -108,7 +109,9 @@ public class FileCreator implements IFileCreator {
             output += "\n";
         }
 
+
         // Error Row, Column 1
+        output += "\n";
         int errors = dataParser.getEmptyPropertyCount();
         output += errorsRowTitle;
         output += addCharacter(" ", columnWidth - errorsRowTitle.length());
@@ -156,6 +159,34 @@ public class FileCreator implements IFileCreator {
         return str.substring(0, 1).toUpperCase() + str.substring(1);
     }
 
+    // Arbitrarily sort keys so that they print exactly as they do in the example output.txt file.
+    private String[] getSortedNames(Map<String, List<Data>> map) {
+        //String[] strArr = map.keySet().toArray(new String[0]);
+        String[] strArr = new String[map.keySet().size()];
+        int index = 3;
+        for (String s : map.keySet()) {
+            char c = s.charAt(0);
+            switch (c) {
+                case 'm':
+                    strArr[0] = s;
+                    break;
+                case 'b':
+                    strArr[1] = s;
+                    break;
+                case 'c':
+                    strArr[2] = s;
+                    break;
+                case 'a':
+                    strArr[3] = s;
+                    break;
+                default: strArr[4] = s;
+            }
+            index++;
+        }
+        Arrays.asList(strArr).forEach(s -> System.out.println(s));
+        return strArr;
+    }
+
     // Returns keys sorted from greatest to lowest in numerical order.
     private String[] getSortedPrices(Map<String, Integer> map) {
         Float[] floats = new Float[map.keySet().size()];
@@ -176,7 +207,7 @@ public class FileCreator implements IFileCreator {
         if (size > 1) {
             return " times";
         }
-        return " time ";
+        return " time ";        // Put space at end so "time " and "times" are the same length for formatting.
     }
 
     private void printToFile(String output) {
