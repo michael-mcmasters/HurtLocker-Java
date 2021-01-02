@@ -25,7 +25,11 @@ public class DataHandler {
         return rawDataParser.convertJSONToObjects(rawData);
     }
 
-    public void printDataToFile() {
-        fileCreator.createLogFile();
+    public boolean printDataToFile() {
+        return fileCreator.createLogFile();
+    }
+
+    public List<Data> getData() {
+        return dataParser.getData();
     }
 }

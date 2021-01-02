@@ -19,7 +19,7 @@ public class FileCreator implements IFileCreator {
 
     // Generate generic report.
     @Override
-    public void createLogFile() {
+    public boolean createLogFile() {
         int columnWidth = 13;               // Every unit is one empty char.
         int widthBetweenColumns = 8;
 
@@ -30,11 +30,11 @@ public class FileCreator implements IFileCreator {
         String errorsRowTitle = "Errors";
         String fuzzyMatchesRowTitle = "Fuzzy Matches";
 
-        createLogFile(columnWidth, widthBetweenColumns, nameColumnTitle, seenColumnTitle, priceColumnTitle, errorsRowTitle, fuzzyMatchesRowTitle);
+        return createLogFile(columnWidth, widthBetweenColumns, nameColumnTitle, seenColumnTitle, priceColumnTitle, errorsRowTitle, fuzzyMatchesRowTitle);
     }
 
     // Generate report with the given criteria.
-    public void createLogFile(int columnWidth, int widthBetweenColumns, String nameColumnTitle, String seenColumnTitle,
+    public boolean createLogFile(int columnWidth, int widthBetweenColumns, String nameColumnTitle, String seenColumnTitle,
                               String priceColumnTitle, String errorsRowTitle, String fuzzyMatchesRowTitle) {
         // Use String instead of StringBuffer to make code more readable.
         String output = "";
@@ -143,7 +143,8 @@ public class FileCreator implements IFileCreator {
 
 
 
-        printToFile(output);
+        boolean successful = printToFile(output);
+        return successful;
     }
 
     // Pass the character you want added, and how many times to add it.
@@ -211,15 +212,17 @@ public class FileCreator implements IFileCreator {
         return " time ";        // Put space at end so "time " and "times" are the same length for formatting.
     }
 
-    private void printToFile(String output) {
+    // Returns true if file was successfully written.
+    private boolean printToFile(String output) {
         File file = new File("output_2.txt");
         try {
             FileWriter writer = new FileWriter(file);
             writer.write(output);
             writer.flush();
             writer.close();
+            return true;
         } catch (IOException e) {
-            System.out.println("FAILED");
+            return false;
         }
     }
 

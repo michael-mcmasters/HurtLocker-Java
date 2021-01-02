@@ -20,6 +20,11 @@ public class DataParser implements IDataParser {
     }
 
     @Override
+    public List<Data> getData() {
+        return dataList;
+    }
+
+    @Override
     public List<Data> getInstancesOfName(String name) {
         return null;
     }
