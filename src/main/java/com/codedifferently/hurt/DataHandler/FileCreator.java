@@ -8,7 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
-// Prints output file.
+// Creates output file and handles formatting.
 public class FileCreator implements IFileCreator {
 
     private IDataParser dataParser;
@@ -18,6 +18,7 @@ public class FileCreator implements IFileCreator {
     }
 
     // Generate generic report.
+    // Returns true if file was created.
     @Override
     public boolean createLogFile() {
         int columnWidth = 13;               // Every unit is one empty char.
@@ -34,8 +35,34 @@ public class FileCreator implements IFileCreator {
     }
 
     // Generate report with the given criteria.
+    // Returns true if file was created.
     public boolean createLogFile(int columnWidth, int widthBetweenColumns, String nameColumnTitle, String seenColumnTitle,
                               String priceColumnTitle, String errorsRowTitle, String fuzzyMatchesRowTitle) {
+
+        String output = generateOutput(columnWidth, widthBetweenColumns, nameColumnTitle, seenColumnTitle, priceColumnTitle, errorsRowTitle, fuzzyMatchesRowTitle);
+        return printToFile(output);
+    }
+
+    // Returns true if file was successfully written.
+    private boolean printToFile(String output) {
+        File file = new File("output_2.txt");
+        try {
+            FileWriter writer = new FileWriter(file);
+            writer.write(output);
+            writer.flush();
+            writer.close();
+            return true;
+        } catch (IOException e) {
+            System.out.println(e);
+            return false;
+        }
+    }
+
+
+
+    // Returns the text that will display in the file.
+    public String generateOutput(int columnWidth, int widthBetweenColumns, String nameColumnTitle, String seenColumnTitle,
+                                 String priceColumnTitle, String errorsRowTitle, String fuzzyMatchesRowTitle) {
         // Use String instead of StringBuffer to make code more readable.
         String output = "";
 
@@ -141,10 +168,7 @@ public class FileCreator implements IFileCreator {
         output += addCharacter(" ", columnWidth - seenColumnTitle.length() - seenFuzzyMatchesStr.length());
         output += seenFuzzyMatchesStr;
 
-
-
-        boolean successful = printToFile(output);
-        return successful;
+        return output;
     }
 
     // Pass the character you want added, and how many times to add it.
@@ -163,9 +187,7 @@ public class FileCreator implements IFileCreator {
 
     // Arbitrarily sort keys so that they print exactly as they do in the example output.txt file.
     private String[] getSortedNames(Map<String, List<Data>> map) {
-        //String[] strArr = map.keySet().toArray(new String[0]);
         String[] strArr = new String[map.keySet().size()];
-        int index = 3;
         for (String s : map.keySet()) {
             char c = s.charAt(0);
             switch (c) {
@@ -183,9 +205,7 @@ public class FileCreator implements IFileCreator {
                     break;
                 default: strArr[4] = s;
             }
-            index++;
         }
-        Arrays.asList(strArr).forEach(s -> System.out.println(s));
         return strArr;
     }
 
@@ -201,6 +221,7 @@ public class FileCreator implements IFileCreator {
         return Arrays.stream(floats).map(String::valueOf).toArray(String[]::new);
     }
 
+    // Determines if "time" or "times" should be used.
     private String getTimesPlurality(String sizeStr) {
         return getTimesPlurality(Integer.parseInt(sizeStr));
     }
@@ -211,19 +232,4 @@ public class FileCreator implements IFileCreator {
         }
         return " time ";        // Put space at end so "time " and "times" are the same length for formatting.
     }
-
-    // Returns true if file was successfully written.
-    private boolean printToFile(String output) {
-        File file = new File("output_2.txt");
-        try {
-            FileWriter writer = new FileWriter(file);
-            writer.write(output);
-            writer.flush();
-            writer.close();
-            return true;
-        } catch (IOException e) {
-            return false;
-        }
-    }
-
 }

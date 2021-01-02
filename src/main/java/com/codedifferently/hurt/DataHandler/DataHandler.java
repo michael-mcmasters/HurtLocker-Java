@@ -16,8 +16,10 @@ public class DataHandler {
     // Automatically instantiates a class for each JSON object.
     public DataHandler(String rawData) {
         rawDataParser = new RawDataParser();
+
         List<Data> dataList = convertJSONToObjects(rawData);
         dataParser = new DataParser(dataList);
+
         fileCreator = new FileCreator(dataParser);
     }
 

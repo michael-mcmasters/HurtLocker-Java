@@ -15,7 +15,7 @@ public class Data {
     protected List<String> additionalProperties;
 
 
-    public Data(boolean fuzzyMatched, String... properties) {
+    public Data(boolean fuzzyMatched, String[] properties) {
         this.fuzzyMatched = fuzzyMatched;
 
         this.name = properties[0];
