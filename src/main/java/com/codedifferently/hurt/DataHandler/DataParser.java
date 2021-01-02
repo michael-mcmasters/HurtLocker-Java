@@ -24,11 +24,6 @@ public class DataParser implements IDataParser {
         return dataList;
     }
 
-    @Override
-    public List<Data> getInstancesOfName(String name) {
-        return null;
-    }
-
     // Groups classes together with similar names. Returns all of their instances.
     // Name is the key, a list of instances with that name is the pair.
     @Override
@@ -89,22 +84,6 @@ public class DataParser implements IDataParser {
         int counter = 0;
         for (Data data : dataList) {
             if (data.getFuzzyMatched()) counter++;
-        }
-        return counter;
-    }
-
-    public void getHowManyTimesAppears() {
-
-    }
-
-    // Returns the total number of empty properties for every JSON object.
-    public int getEmptyPropertyCount() {
-        int counter = 0;
-        for (Data data : dataList) {
-            if (data.name.length() == 0) counter++;
-            if (data.price.length() == 0) counter++;
-            if (data.type.length() == 0) counter++;
-            if (data.expiration.length() == 0) counter++;
         }
         return counter;
     }

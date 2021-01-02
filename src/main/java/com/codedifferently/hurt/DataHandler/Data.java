@@ -22,9 +22,9 @@ public class Data {
         this.price = properties[1];
         this.type = properties[2];
         this.expiration = properties[3];
-        this.additionalProperties = new ArrayList<>();
 
         // This never happens for this project but I figured it would be a good edge case to check for in the real world.
+        this.additionalProperties = new ArrayList<>();
         if (properties.length > 4) {
             System.out.println("Note! There were more properties than expected. Adding them to additionalProperties.");
             for (int i = 4; i < properties.length; i++) {

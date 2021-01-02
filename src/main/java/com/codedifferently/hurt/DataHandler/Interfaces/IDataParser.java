@@ -9,7 +9,6 @@ import java.util.function.Function;
 public interface IDataParser {
 
     public List<Data> getData();
-    public List<Data> getInstancesOfName(String name);
     public Map<String, List<Data>> getInstancesOfEveryName();
     public Map<String, Integer> getNamesAndOccurences(List<Data> dataList);
     public Map<String, Integer> getPricesAndOccurences(List<Data> dataList);
@@ -17,5 +16,4 @@ public interface IDataParser {
     public Map<String, Integer> getExpirationsAndOccurences(List<Data> dataList);
     public Map<String, Integer> getPropertyAndOccurences(List<Data> dataList, Function<Data, String> function);
     public int getFuzzyMatchCount();
-    public int getEmptyPropertyCount();
 }

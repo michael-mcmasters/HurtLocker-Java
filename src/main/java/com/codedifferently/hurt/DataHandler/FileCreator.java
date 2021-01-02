@@ -2,6 +2,7 @@ package com.codedifferently.hurt.DataHandler;
 
 import com.codedifferently.hurt.DataHandler.Interfaces.IDataParser;
 import com.codedifferently.hurt.DataHandler.Interfaces.IFileCreator;
+import com.codedifferently.hurt.DataHandler.Interfaces.IRawDataParser;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -12,9 +13,11 @@ import java.util.*;
 public class FileCreator implements IFileCreator {
 
     private IDataParser dataParser;
+    private IRawDataParser rawDataParser;
 
-    public FileCreator(IDataParser dataParser) {
+    public FileCreator(IDataParser dataParser, IRawDataParser rawDataParser) {
         this.dataParser = dataParser;
+        this.rawDataParser = rawDataParser;
     }
 
     // Generate generic report.
@@ -140,7 +143,7 @@ public class FileCreator implements IFileCreator {
 
         // Error Row, Column 1
         output += "\n";
-        int errors = dataParser.getEmptyPropertyCount();
+        int errors = rawDataParser.getErrorCount();
         output += errorsRowTitle;
         output += addCharacter(" ", columnWidth - errorsRowTitle.length());
         output += addCharacter(" ", widthBetweenColumns);
