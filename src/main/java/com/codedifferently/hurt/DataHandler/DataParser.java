@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
+// Holds all Data objects instantiated from JSON file.
+// Contains helper methods to parse data.
 public class DataParser implements IDataParser {
 
     List<Data> dataList;

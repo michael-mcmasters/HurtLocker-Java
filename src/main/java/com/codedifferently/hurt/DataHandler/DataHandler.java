@@ -6,15 +6,18 @@ import com.codedifferently.hurt.DataHandler.Interfaces.IRawDataParser;
 
 import java.util.List;
 
+// Container for objects that handle parsing raw data, parsing the class data, and printing output files.
 public class DataHandler {
 
     private IRawDataParser rawDataParser;
     private IDataParser dataParser;
     private IFileCreator fileCreator;
 
+    // Automatically instantiates a class for each JSON object.
     public DataHandler(String rawData) {
         rawDataParser = new RawDataParser();
-        dataParser = new DataParser(convertJSONToObjects(rawData));
+        List<Data> dataList = convertJSONToObjects(rawData);
+        dataParser = new DataParser(dataList);
         fileCreator = new FileCreator(dataParser);
     }
 

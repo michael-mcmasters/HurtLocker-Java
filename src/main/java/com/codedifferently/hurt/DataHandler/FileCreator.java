@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
+// Prints output file.
 public class FileCreator implements IFileCreator {
 
     private IDataParser dataParser;

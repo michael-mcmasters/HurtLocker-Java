@@ -3,6 +3,7 @@ package com.codedifferently.hurt.DataHandler;
 import java.util.ArrayList;
 import java.util.List;
 
+// Holds properties for every JSON object.
 public class Data {
 
     private final boolean fuzzyMatched;
