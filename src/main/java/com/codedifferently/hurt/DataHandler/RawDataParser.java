@@ -31,6 +31,7 @@ public class RawDataParser implements IRawDataParser {
         return dataList;
     }
 
+    @Override
     public int getErrorCount() {
         return errorCount;
     }

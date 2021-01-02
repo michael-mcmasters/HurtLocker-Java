@@ -7,5 +7,6 @@ import java.util.List;
 public interface IRawDataParser {
 
     public List<Data> convertJSONToObjects(String rawData);
+    public int getErrorCount();
 
 }
