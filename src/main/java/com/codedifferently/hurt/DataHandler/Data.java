@@ -5,13 +5,18 @@ import java.util.List;
 
 public class Data {
 
+    private final boolean fuzzyMatched;
+
     protected String name;
     protected String price;
     protected String type;
     protected String expiration;
     protected List<String> additionalProperties;
 
-    public Data(String... properties) {
+
+    public Data(boolean fuzzyMatched, String... properties) {
+        this.fuzzyMatched = fuzzyMatched;
+
         this.name = properties[0];
         this.price = properties[1];
         this.type = properties[2];
@@ -25,5 +30,9 @@ public class Data {
                 additionalProperties.add(properties[i]);
             }
         }
+    }
+
+    public boolean getFuzzyMatched() {
+        return fuzzyMatched;
     }
 }

@@ -4,7 +4,6 @@ import com.codedifferently.hurt.DataHandler.Interfaces.IRawDataParser;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
 
 public class RawDataParser implements IRawDataParser {
 
@@ -16,20 +15,21 @@ public class RawDataParser implements IRawDataParser {
         rawData = rawData.toLowerCase();
         String[] linesOfData = rawData.split("##");
         for (String line : linesOfData) {
-            String[] properties = getProperties(line);
-            properties = fuzzyMatchProperties(properties, dataList);
+            String[] parsedProperties = parseProperties(line);
+            String[] properties = fuzzyMatchProperties(parsedProperties, dataList);
+            boolean fuzzyMatched = properties != parsedProperties;
 
-            dataList.add(new Data(properties));
+            dataList.add(new Data(fuzzyMatched, properties));
         }
         return dataList;
     }
 
     // Returns an array of properties for the corrupted JSON object.
     // Use list<> instead of an array just in case there are more than 4 items.
-    private String[] getProperties(String lineOfData) {
+    private String[] parseProperties(String lineOfData) {
         List<String> properties = new ArrayList<>();
 
-        // We only want the pair, so loop through ever odd number.
+        // We only want the pair, so loop through every odd number.
         String[] keysAndPairs = lineOfData.split("(;|:|\\^|%|\\*|@|!)");
         for (int i = 1; i < keysAndPairs.length; i += 2) {
             try {
@@ -43,10 +43,7 @@ public class RawDataParser implements IRawDataParser {
         return properties.stream().toArray(String[]::new);
     }
 
-
-
-
-    // Renames property if it closely resembles another property.
+    // Renames property if it closely resembles another property. Returns same properties otherwise.
     private String[] fuzzyMatchProperties(String[] properties, List<Data> dataList) {
         for (Data data : dataList) {
             // Only match name and type properties because price and date are too similar and will return false positives.
@@ -57,7 +54,7 @@ public class RawDataParser implements IRawDataParser {
     }
 
     private String fuzzyMatchProperty(String newProperty, String existingProperty) {
-        // 3 characters is not enough information to fuzzy match.
+        // 3 characters is not enough information to fuzzy match. Return.
         if (newProperty.length() < 4) return newProperty;
 
         if (getMatchingCharCount(newProperty, existingProperty) >= 4) {
