@@ -22,8 +22,8 @@ public class RawDataParser implements IRawDataParser {
             try {
                 String[] parsedProperties = parseProperties(line);
                 String[] properties = fuzzyMatchProperties(parsedProperties, dataList);
-                boolean fuzzyMatched = fuzzyMatched(properties, parsedProperties);
-                dataList.add(new Data(fuzzyMatched, properties));
+                boolean wasFuzzyMatched = wasFuzzyMatched(properties, parsedProperties);
+                dataList.add(new Data(wasFuzzyMatched, properties));
             } catch (NotEnoughDataException e) {
                 errorCount++;
             }
@@ -94,8 +94,8 @@ public class RawDataParser implements IRawDataParser {
     }
 
     // If any properties don't match, they were fuzzy matched.
-    // (Have to do it this way because Java doesn't have tuples or passing by reference :( )
-    private boolean fuzzyMatched(String[] propsA, String[] propsB) {
+    // (Have to do it this way because Java doesn't have tuples or passing by reference :(  )
+    private boolean wasFuzzyMatched(String[] propsA, String[] propsB) {
         if (propsA.length != propsB.length) return true;
 
         for (int i = 0; i < propsA.length; i++) {

@@ -21,7 +21,7 @@ public class DataHandlerTest {
 
     @Test
     public void testConstructor() {
-        List<Data> data = dataHandler.getData();
+        List<Data> data = dataHandler.getDataList();
         Assert.assertTrue(data.size() > 0);
     }
 

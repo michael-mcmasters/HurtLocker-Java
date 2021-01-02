@@ -8,19 +8,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
-// Holds all Data objects instantiated from JSON file.
-// Contains helper methods to parse data.
+// Holds all Data objects and has helper methods to easily parse information from them.
+// (Not to be confused with RawDataParser which is what instantiates the Data objects from the corrupted JSON file.)
 public class DataParser implements IDataParser {
 
     List<Data> dataList;
 
     public DataParser(List<Data> dataList) {
         this.dataList = dataList;
-        //dataList.forEach(d -> System.out.println("Name: " + d.name + "\n" + "Price: " + d.price + "\n" + "Type: " + d.type + "\n" + "Expiration: " + d.expiration + "\n" + "FuzzyMatched: " + d.getFuzzyMatched() + "\n"));
+        dataList.forEach(d -> System.out.println("Name: " + d.name + "\n" + "Price: " + d.price + "\n" + "Type: " + d.type + "\n" + "Expiration: " + d.expiration + "\n" + "FuzzyMatched: " + d.getFuzzyMatched() + "\n"));
     }
 
     @Override
-    public List<Data> getData() {
+    public List<Data> getDataList() {
         return dataList;
     }
 

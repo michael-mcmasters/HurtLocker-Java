@@ -6,7 +6,7 @@ import com.codedifferently.hurt.DataHandler.Interfaces.IRawDataParser;
 
 import java.util.List;
 
-// Container for objects that handle parsing raw data, parsing the class data, and printing output files.
+// Container class that determines how data is parsed, instantiated, and printed.
 public class DataHandler {
 
     private IRawDataParser rawDataParser;
@@ -25,8 +25,8 @@ public class DataHandler {
         return fileCreator.createLogFile();
     }
 
-    public List<Data> getData() {
-        return dataParser.getData();
+    public List<Data> getDataList() {
+        return dataParser.getDataList();
     }
 
     public IDataParser getDataParser() {

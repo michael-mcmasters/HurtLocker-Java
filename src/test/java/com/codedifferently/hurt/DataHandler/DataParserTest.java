@@ -1,6 +1,5 @@
 package com.codedifferently.hurt.DataHandler;
 
-import com.codedifferently.hurt.DataHandler.Interfaces.IDataParser;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,7 +25,7 @@ public class DataParserTest {
 
     @Test
     public void testGetData() {
-        List<Data> dataList = dataParser.getData();
+        List<Data> dataList = dataParser.getDataList();
         Assert.assertTrue(dataList.size() > 0);
     }
 
@@ -39,7 +38,7 @@ public class DataParserTest {
 
     @Test
     public void testMilkNameOccurs6Times() {
-        List<Data> dataList = dataParser.getData();
+        List<Data> dataList = dataParser.getDataList();
         Map<String, Integer> occurences = dataParser.getNamesAndOccurences(dataList);
         int expected = 6;
         int actual = occurences.get("milk");
@@ -48,7 +47,7 @@ public class DataParserTest {
 
     @Test
     public void testDollarTwentyThreePriceOccurs6Times() {
-        List<Data> dataList = dataParser.getData();
+        List<Data> dataList = dataParser.getDataList();
         Map<String, Integer> occurences = dataParser.getPricesAndOccurences(dataList);
         int expected = 7;
         int actual = occurences.get("1.23");
@@ -57,7 +56,7 @@ public class DataParserTest {
 
     @Test
     public void testFoodTypeOccurs24Times() {
-        List<Data> dataList = dataParser.getData();
+        List<Data> dataList = dataParser.getDataList();
         Map<String, Integer> occurences = dataParser.getTypesAndOccurences(dataList);
         int expected = 24;
         int actual = occurences.get("food");
@@ -66,7 +65,7 @@ public class DataParserTest {
 
     @Test
     public void testDateOccurs10Times() {
-        List<Data> dataList = dataParser.getData();
+        List<Data> dataList = dataParser.getDataList();
         Map<String, Integer> occurences = dataParser.getExpirationsAndOccurences(dataList);
         int expected = 10;
         int actual = occurences.get("1/25/2016");
@@ -75,7 +74,7 @@ public class DataParserTest {
 
     @Test
     public void testBreadOccurs6TimesWithLambda() {
-        List<Data> dataList = dataParser.getData();
+        List<Data> dataList = dataParser.getDataList();
         Map<String, Integer> occurences = dataParser.getPropertyAndOccurences(dataList, d -> d.name);
         int expected = 6;
         int actual = occurences.get("bread");

@@ -8,7 +8,7 @@ import java.util.function.Function;
 
 public interface IDataParser {
 
-    public List<Data> getData();
+    public List<Data> getDataList();
     public Map<String, List<Data>> getInstancesOfEveryName();
     public Map<String, Integer> getNamesAndOccurences(List<Data> dataList);
     public Map<String, Integer> getPricesAndOccurences(List<Data> dataList);
