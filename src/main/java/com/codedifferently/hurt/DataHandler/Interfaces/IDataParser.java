@@ -15,5 +15,6 @@ public interface IDataParser {
     public Map<String, Integer> getTypesAndOccurences(List<Data> dataList);
     public Map<String, Integer> getExpirationsAndOccurences(List<Data> dataList);
     public Map<String, Integer> getPropertyAndOccurences(List<Data> dataList, Function<Data, String> function);
+    public int getEmptyPropertyCount();
 
 }

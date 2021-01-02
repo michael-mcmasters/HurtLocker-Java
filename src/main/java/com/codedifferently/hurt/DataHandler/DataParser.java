@@ -81,4 +81,16 @@ public class DataParser implements IDataParser {
     public void getHowManyTimesAppears() {
 
     }
+
+    // Returns the total number of empty properties for every JSON object.
+    public int getEmptyPropertyCount() {
+        int counter = 0;
+        for (Data data : dataList) {
+            if (data.name.length() == 0) counter++;
+            if (data.price.length() == 0) counter++;
+            if (data.type.length() == 0) counter++;
+            if (data.expiration.length() == 0) counter++;
+        }
+        return counter;
+    }
 }

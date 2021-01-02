@@ -18,13 +18,14 @@ public class FileCreator implements IFileCreator {
 
     @Override
     public void createLogFile() {
+        // Use String instead of StringBuffer to make code more readable.
         String output = "";
 
         // Name is the key (milk, bread, etc).
         // Pair is a list of instances of every Data object with that name property.
         Map<String, List<Data>> names = dataParser.getInstancesOfEveryName();
 
-        // Every unit is one empty char
+        // Every unit is one empty char.
         int columnWidth = 13;
         int widthBetweenColumns = 8;
 
@@ -98,6 +99,18 @@ public class FileCreator implements IFileCreator {
             output += "\n";
         }
 
+        // Error Row, Column 1
+        int errors = dataParser.getEmptyPropertyCount();
+        output += "Errors";
+        output += addCharacter(" ", columnWidth - "Errors".length());
+        output += addCharacter(" ", widthBetweenColumns);
+
+        // Error Row, Column 2
+        output += seenColumnTitle;
+        String seenTimesStr = errors + " times";
+        output += addCharacter(" ", columnWidth - seenColumnTitle.length() - seenTimesStr.length());
+        output += seenTimesStr;
+
         printToFile(output);
     }
 
@@ -130,9 +143,6 @@ public class FileCreator implements IFileCreator {
     private void printToFile(String output) {
         File file = new File("output_2.txt");
         try {
-            //String output = getData();
-            //String output = "wow";
-
             FileWriter writer = new FileWriter(file);
             writer.write(output);
             writer.flush();

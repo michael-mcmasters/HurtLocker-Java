@@ -20,3 +20,4 @@ Name: Cookies        Seen: 8 times
 Price:   2.25        Seen: 8 times        
 -------------        -------------
 
+Errors               Seen: 4 times
