@@ -78,6 +78,14 @@ public class DataParser implements IDataParser {
         return map;
     }
 
+    public int getFuzzyMatchCount() {
+        int counter = 0;
+        for (Data data : dataList) {
+            if (data.getFuzzyMatched()) counter++;
+        }
+        return counter;
+    }
+
     public void getHowManyTimesAppears() {
 
     }

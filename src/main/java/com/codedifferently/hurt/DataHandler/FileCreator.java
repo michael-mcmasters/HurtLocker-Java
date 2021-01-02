@@ -111,6 +111,13 @@ public class FileCreator implements IFileCreator {
         output += addCharacter(" ", columnWidth - seenColumnTitle.length() - seenTimesStr.length());
         output += seenTimesStr;
 
+
+
+        // Fuzzy Matched Row, Column 1
+        int fuzzyMatches = dataParser.getFuzzyMatchCount();
+        System.out.println(fuzzyMatches);
+
+
         printToFile(output);
     }
 

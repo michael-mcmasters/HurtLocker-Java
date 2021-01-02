@@ -3,6 +3,7 @@ package com.codedifferently.hurt.DataHandler;
 import com.codedifferently.hurt.DataHandler.Interfaces.IRawDataParser;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class RawDataParser implements IRawDataParser {
@@ -17,7 +18,7 @@ public class RawDataParser implements IRawDataParser {
         for (String line : linesOfData) {
             String[] parsedProperties = parseProperties(line);
             String[] properties = fuzzyMatchProperties(parsedProperties, dataList);
-            boolean fuzzyMatched = properties != parsedProperties;
+            boolean fuzzyMatched = fuzzyMatched(properties, parsedProperties);
 
             dataList.add(new Data(fuzzyMatched, properties));
         }
@@ -44,7 +45,8 @@ public class RawDataParser implements IRawDataParser {
     }
 
     // Renames property if it closely resembles another property. Returns same properties otherwise.
-    private String[] fuzzyMatchProperties(String[] properties, List<Data> dataList) {
+    private String[] fuzzyMatchProperties(String[] parsedProperties, List<Data> dataList) {
+        String[] properties = Arrays.copyOf(parsedProperties, parsedProperties.length);
         for (Data data : dataList) {
             // Only match name and type properties because price and date are too similar and will return false positives.
             properties[0] = fuzzyMatchProperty(properties[0], data.name);
@@ -79,5 +81,17 @@ public class RawDataParser implements IRawDataParser {
         if (a < b)
             return a;
         return b;
+    }
+
+    // If any properties don't match, they were fuzzy matched.
+    // (Have to do it this way because Java doesn't have tuples or passing by reference :( )
+    private boolean fuzzyMatched(String[] propsA, String[] propsB) {
+        if (propsA.length != propsB.length) return true;
+
+        for (int i = 0; i < propsA.length; i++) {
+            if (!propsA[i].equals(propsB[i]))
+                return true;
+        }
+        return false;
     }
 }
