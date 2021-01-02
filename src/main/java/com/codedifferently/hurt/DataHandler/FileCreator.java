@@ -16,17 +16,10 @@ public class FileCreator implements IFileCreator {
         this.dataParser = dataParser;
     }
 
+    // Generate generic report.
     @Override
     public void createLogFile() {
-        // Use String instead of StringBuffer to make code more readable.
-        String output = "";
-
-        // Name is the key (milk, bread, etc).
-        // Pair is a list of instances of every Data object with that name property.
-        Map<String, List<Data>> names = dataParser.getInstancesOfEveryName();
-
-        // Every unit is one empty char.
-        int columnWidth = 13;
+        int columnWidth = 13;               // Every unit is one empty char.
         int widthBetweenColumns = 8;
 
         String nameColumnTitle = "Name:";
@@ -35,6 +28,19 @@ public class FileCreator implements IFileCreator {
 
         String errorsRowTitle = "Errors";
         String fuzzyMatchesRowTitle = "Fuzzy Matches";
+
+        createLogFile(columnWidth, widthBetweenColumns, nameColumnTitle, seenColumnTitle, priceColumnTitle, errorsRowTitle, fuzzyMatchesRowTitle);
+    }
+
+    // Generate report with the given criteria.
+    public void createLogFile(int columnWidth, int widthBetweenColumns, String nameColumnTitle, String seenColumnTitle,
+                              String priceColumnTitle, String errorsRowTitle, String fuzzyMatchesRowTitle) {
+        // Use String instead of StringBuffer to make code more readable.
+        String output = "";
+
+        // Name is the key (milk, bread, etc).
+        // Pair is a list of instances of every Data object with that name property.
+        Map<String, List<Data>> names = dataParser.getInstancesOfEveryName();
 
         for (String name : names.keySet()) {
             List<Data> list = names.get(name);
