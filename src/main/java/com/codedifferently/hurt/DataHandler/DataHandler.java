@@ -28,4 +28,8 @@ public class DataHandler {
     public List<Data> getData() {
         return dataParser.getData();
     }
+
+    public IDataParser getDataParser() {
+        return dataParser;
+    }
 }

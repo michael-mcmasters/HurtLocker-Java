@@ -16,7 +16,7 @@ public class DataParser implements IDataParser {
 
     public DataParser(List<Data> dataList) {
         this.dataList = dataList;
-        dataList.forEach(d -> System.out.println("Name: " + d.name + "\n" + "Price: " + d.price + "\n" + "Type: " + d.type + "\n" + "Expiration: " + d.expiration + "\n" + "FuzzyMatched: " + d.getFuzzyMatched() + "\n"));
+        //dataList.forEach(d -> System.out.println("Name: " + d.name + "\n" + "Price: " + d.price + "\n" + "Type: " + d.type + "\n" + "Expiration: " + d.expiration + "\n" + "FuzzyMatched: " + d.getFuzzyMatched() + "\n"));
     }
 
     @Override
@@ -29,19 +29,39 @@ public class DataParser implements IDataParser {
     @Override
     public Map<String, List<Data>> getInstancesOfEveryName() {
         // Name, every class instance holding that name
-        Map<String, List<Data>> map = new HashMap<>();
+        Map<String, List<Data>> instances = new HashMap<>();
 
         for (Data data : dataList) {
             String name = data.name;
             if (name == "") continue;
 
-            if (!map.containsKey(name)) {
-                map.put(name, new ArrayList<>());
+            if (!instances.containsKey(name)) {
+                instances.put(name, new ArrayList<>());
             }
-            List<Data> list = map.get(name);
+            List<Data> list = instances.get(name);
             list.add(data);
         }
-        return map;
+        return instances;
+    }
+
+    // Returns every found value in the given list and how many times it occurred.
+    // The type of Value is the property passed as a lambda (name, price, expiration, etc).
+    // (Use lambda so code doesn't need to be repeated for every property.)
+    public Map<String, Integer> getPropertyAndOccurences(List<Data> dataList, Function<Data, String> function) {
+        Map<String, Integer> occurences = new HashMap<>();
+
+        for (Data data : dataList) {
+            String property = function.apply(data);
+            if (property == "") continue;
+
+            if (!occurences.containsKey(property)) {
+                occurences.put(property, 1);
+            } else {
+                int timesAppeared = occurences.get(property);
+                occurences.put(property, ++timesAppeared);
+            }
+        }
+        return occurences;
     }
 
     // Helper methods for if you don't want to pass a lambda.
@@ -59,25 +79,6 @@ public class DataParser implements IDataParser {
 
     public Map<String, Integer> getExpirationsAndOccurences(List<Data> dataList) {
         return getPropertyAndOccurences(dataList, data -> data.expiration);
-    }
-
-    // Returns every property of the given type (name, price, etc), and how many times it appeared.
-    // (Pass a lambda for the property you want to get. This way we don't need to re-create this function for every property the object has.)
-    public Map<String, Integer> getPropertyAndOccurences(List<Data> dataList, Function<Data, String> function) {
-        Map<String, Integer> map = new HashMap<>();
-
-        for (Data data : dataList) {
-            String property = function.apply(data); // Property is the lambda getter being passed. Could be name, price, type, expiration etc.
-            if (property == "") continue;
-
-            if (!map.containsKey(property)) {
-                map.put(property, 1);
-            } else {
-                int timesAppeared = map.get(property);
-                map.put(property, ++timesAppeared);
-            }
-        }
-        return map;
     }
 
     public int getFuzzyMatchCount() {
