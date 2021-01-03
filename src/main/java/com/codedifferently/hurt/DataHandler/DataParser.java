@@ -85,6 +85,7 @@ public class DataParser implements IDataParser {
     }
 
     // Returns keys sorted from lowest to greatest or greatest to lowest in numerical order.
+    @Override
     public String[] sortPricesNumerically(Map<String, Integer> map, SortOrder sortOrder) {
         Float[] floats = convertToFloat(map);
 
