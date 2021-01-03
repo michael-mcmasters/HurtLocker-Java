@@ -23,7 +23,7 @@ public class RawDataParser implements IRawDataParser {
                 String[] parsedProperties = parseProperties(line);
                 String[] properties = fuzzyMatchProperties(parsedProperties, dataList);
                 boolean wasFuzzyMatched = wasFuzzyMatched(properties, parsedProperties);
-                dataList.add(new Data(wasFuzzyMatched, properties));
+                dataList.add(new Data(properties, wasFuzzyMatched));
             } catch (NotEnoughDataException e) {
                 errorCount++;
             }
