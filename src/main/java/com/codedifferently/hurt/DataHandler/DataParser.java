@@ -1,11 +1,9 @@
 package com.codedifferently.hurt.DataHandler;
 
+import com.codedifferently.hurt.DataHandler.Enums.SortOrder;
 import com.codedifferently.hurt.DataHandler.Interfaces.IDataParser;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 
 // Holds all Data objects and has helper methods to easily parse information from them.
@@ -44,10 +42,10 @@ public class DataParser implements IDataParser {
         return instances;
     }
 
-    @Override
     // Returns every found value in the given list and how many times it occurred.
     // The type of Value is the property passed as a lambda (name, price, expiration, etc).
     // (Use lambda so code doesn't need to be repeated for every property.)
+    @Override
     public Map<String, Integer> getPropertyAndOccurences(List<Data> dataList, Function<Data, String> function) {
         Map<String, Integer> occurences = new HashMap<>();
 
@@ -65,8 +63,8 @@ public class DataParser implements IDataParser {
         return occurences;
     }
 
-    @Override
     // Helper methods for if you don't want to pass a lambda.
+    @Override
     public Map<String, Integer> getNamesAndOccurences(List<Data> dataList) {
         return getPropertyAndOccurences(dataList, data -> data.name);
     }
@@ -86,6 +84,16 @@ public class DataParser implements IDataParser {
         return getPropertyAndOccurences(dataList, data -> data.expiration);
     }
 
+    // Returns keys sorted from lowest to greatest or greatest to lowest in numerical order.
+    public String[] sortPricesNumerically(Map<String, Integer> map, SortOrder sortOrder) {
+        Float[] floats = convertToFloat(map);
+
+        if (sortOrder == SortOrder.GREATESTTOLOWEST) Arrays.sort(floats, Collections.reverseOrder());
+        else if (sortOrder == SortOrder.LOWESTTOGREATEST) Arrays.sort(floats);
+
+        return convertToString(floats);
+    }
+
     @Override
     public int getFuzzyMatchCount() {
         int counter = 0;
@@ -93,5 +101,19 @@ public class DataParser implements IDataParser {
             if (data.getFuzzyMatched()) counter++;
         }
         return counter;
+    }
+
+    private Float[] convertToFloat(Map<String, Integer> map) {
+        Float[] floats = new Float[map.keySet().size()];
+        int index = 0;
+        for (String k : map.keySet()) {
+            floats[index] = Float.parseFloat(k);
+            index++;
+        }
+        return floats;
+    }
+
+    private String[] convertToString(Float[] floats) {
+        return Arrays.stream(floats).map(String::valueOf).toArray(String[]::new);
     }
 }

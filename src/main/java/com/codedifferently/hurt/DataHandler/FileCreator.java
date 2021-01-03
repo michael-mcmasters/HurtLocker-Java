@@ -1,5 +1,6 @@
 package com.codedifferently.hurt.DataHandler;
 
+import com.codedifferently.hurt.DataHandler.Enums.SortOrder;
 import com.codedifferently.hurt.DataHandler.Interfaces.IDataParser;
 import com.codedifferently.hurt.DataHandler.Interfaces.IFileCreator;
 import com.codedifferently.hurt.DataHandler.Interfaces.IRawDataParser;
@@ -109,7 +110,7 @@ public class FileCreator implements IFileCreator {
 
             // Row 3 - Print all prices with a dotted line underneath.
             Map<String, Integer> prices = dataParser.getPricesAndOccurences(list);
-            String[] sortedPrices = getSortedPrices(prices);
+            String[] sortedPrices = dataParser.sortPricesNumerically(prices, SortOrder.GREATESTTOLOWEST);
 
             boolean addDottedLine = true;       // (Dotted line is only added after every other price).
             for (String price: sortedPrices) {
@@ -210,18 +211,6 @@ public class FileCreator implements IFileCreator {
             }
         }
         return strArr;
-    }
-
-    // Returns keys sorted from greatest to lowest in numerical order.
-    private String[] getSortedPrices(Map<String, Integer> map) {
-        Float[] floats = new Float[map.keySet().size()];
-        int index = 0;
-        for (String k : map.keySet()) {
-            floats[index] = Float.parseFloat(k);
-            index++;
-        }
-        Arrays.sort(floats, Collections.reverseOrder());
-        return Arrays.stream(floats).map(String::valueOf).toArray(String[]::new);
     }
 
     // Determines if "time" or "times" should be used.

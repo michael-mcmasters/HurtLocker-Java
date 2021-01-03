@@ -1,6 +1,7 @@
 package com.codedifferently.hurt.DataHandler.Interfaces;
 
 import com.codedifferently.hurt.DataHandler.Data;
+import com.codedifferently.hurt.DataHandler.Enums.SortOrder;
 
 import java.util.List;
 import java.util.Map;
@@ -15,5 +16,6 @@ public interface IDataParser {
     public Map<String, Integer> getTypesAndOccurences(List<Data> dataList);
     public Map<String, Integer> getExpirationsAndOccurences(List<Data> dataList);
     public Map<String, Integer> getPropertyAndOccurences(List<Data> dataList, Function<Data, String> function);
+    public String[] sortPricesNumerically(Map<String, Integer> map, SortOrder sortOrder);
     public int getFuzzyMatchCount();
 }
