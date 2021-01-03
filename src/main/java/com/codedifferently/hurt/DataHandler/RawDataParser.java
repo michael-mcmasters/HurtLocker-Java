@@ -67,7 +67,7 @@ public class RawDataParser implements IRawDataParser {
 
     private String fuzzyMatchProperty(String newProperty, String existingProperty) {
         // 3 characters is not enough information to fuzzy match. Return.
-        if (newProperty.length() < 4) return newProperty;
+        if (newProperty.length() < 4) return existingProperty;
 
         if (getMatchingCharCount(newProperty, existingProperty) >= 4) {
             return existingProperty;
