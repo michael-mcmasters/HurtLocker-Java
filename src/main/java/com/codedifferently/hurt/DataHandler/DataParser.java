@@ -92,8 +92,8 @@ public class DataParser implements IDataParser {
         return dataList.stream()
             .collect(Collectors.toMap(
                 getProperty,                // Getter function (name, price, type, or expiration).
-                pair -> 1,                  // Initial value if item isn't yet in map (map.containsKey(false)).
-                Integer::sum                // Increment value by 1 if item is already in map (map.containsKey(true)).
+                pair -> 1,                  // Initial value if item isn't yet in map (map.containsKey() == false).
+                Integer::sum                // Increment value by 1 if item is already in map (map.containsKey() == true).
             ));
     }
 
