@@ -19,28 +19,28 @@ public class DataTest {
     @Test
     public void testConstructor() {
         String[] properties = { "milk", "4.89", "food", "12/11/20" };
-        Data data = new Data(false, properties);
+        Data data = new Data(properties, false);
         Assert.assertEquals("12/11/20", data.expiration);
     }
 
     @Test
     public void testFuzzyMatchedFalse() {
         String[] properties = { "milk", "4.89", "food", "12/11/20" };
-        Data data = new Data(false, properties);
+        Data data = new Data(properties, false);
         Assert.assertFalse(data.getFuzzyMatched());
     }
 
     @Test
     public void testFuzzyMatchedTrue() {
         String[] properties = { "milk", "4.89", "food", "12/11/20" };
-        Data data = new Data(true, properties);
+        Data data = new Data(properties, true);
         Assert.assertTrue(data.getFuzzyMatched());
     }
 
     @Test
     public void testGetAdditionalProperties() {
         String[] properties = { "milk", "4.89", "food", "12/11/20", "shoes", "1738", "ambulence" };
-        Data data = new Data(true, properties);
+        Data data = new Data(properties, true);
         int expected = 3;
         List<String> additionalProperties = data.additionalProperties;
         int actual = additionalProperties.size();
