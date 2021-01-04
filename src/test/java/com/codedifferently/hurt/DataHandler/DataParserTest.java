@@ -89,6 +89,16 @@ public class DataParserTest {
     }
 
     @Test
+    public void testGetPropertyImperatively() {
+        List<Data> dataList = dataParser.getDataList();
+        Map<String, Integer> occurences = dataParser.getPropertyAndOccurencesImperative(dataList, d -> d.name);
+
+        int expected = 6;
+        int actual = occurences.get("bread");
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
     public void testSortPricesNumericallyGreatestToLowest() {
         List<Data> dataList = dataParser.getDataList();
         Map<String, Integer> prices = dataParser.getPricesAndOccurences(dataList);

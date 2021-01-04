@@ -15,7 +15,7 @@ public class DataParser implements IDataParser {
 
     public DataParser(List<Data> dataList) {
         this.dataList = dataList;
-        dataList.forEach(d -> System.out.println("Name: " + d.name + "\n" + "Price: " + d.price + "\n" + "Type: " + d.type + "\n" + "Expiration: " + d.expiration + "\n" + "FuzzyMatched: " + d.getFuzzyMatched() + "\n"));
+        //dataList.forEach(d -> System.out.println("Name: " + d.name + "\n" + "Price: " + d.price + "\n" + "Type: " + d.type + "\n" + "Expiration: " + d.expiration + "\n" + "FuzzyMatched: " + d.getFuzzyMatched() + "\n"));
     }
 
     @Override
@@ -64,6 +64,19 @@ public class DataParser implements IDataParser {
         return getPropertyAndOccurences(dataList, data -> data.expiration);
     }
 
+    // *** Declarative Method ***
+    // Returns every found value in the given list and how many times it occurred.
+    // The property searched for is passed as a getter function... This is done so method doesn't need to be repeated for every property.
+    @Override
+    public Map<String, Integer> getPropertyAndOccurences(List<Data> dataList, Function<Data, String> getProperty) {
+        return dataList.stream()
+            .collect(Collectors.toMap(
+                getProperty,                // Getter function (name, price, type, or expiration).
+                pair -> 1,                  // Initial value if item isn't yet in map (map.containsKey() == false).
+                Integer::sum                // Increment value by 1 if item is already in map (map.containsKey() == true).
+            ));
+    }
+
     // *** Imperative Method ***
     // Returns every found value in the given list and how many times it occurred.
     // The property searched for is passed as a getter function... This is done so method doesn't need to be repeated for every property.
@@ -83,21 +96,6 @@ public class DataParser implements IDataParser {
         }
         return occurences;
     }
-
-    // *** Declarative Method ***
-    // Returns every found value in the given list and how many times it occurred.
-    // The property searched for is passed as a getter function... This is done so method doesn't need to be repeated for every property.
-    @Override
-    public Map<String, Integer> getPropertyAndOccurences(List<Data> dataList, Function<Data, String> getProperty) {
-        return dataList.stream()
-            .collect(Collectors.toMap(
-                getProperty,                // Getter function (name, price, type, or expiration).
-                pair -> 1,                  // Initial value if item isn't yet in map (map.containsKey() == false).
-                Integer::sum                // Increment value by 1 if item is already in map (map.containsKey() == true).
-            ));
-    }
-
-
 
     // Returns keys sorted from lowest to greatest or greatest to lowest in numerical order.
     @Override
